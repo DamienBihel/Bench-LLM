@@ -1,12 +1,22 @@
 const COLORS = ["#7cc4ff", "#f8b26a", "#b794f6", "#4ade80", "#f87171", "#fbbf24", "#34d399", "#c084fc"];
 
+let DATA = null;
+let CURRENT_RUN = null;
+let SELECTED_MODELS = new Set();
+let CURRENT_TEST = null;
+const charts = {};
+
+function getCssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || "";
+}
+
 /* ---------- theme ---------- */
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
   localStorage.setItem("bench-theme", theme);
   const btn = document.getElementById("theme-toggle");
   if (btn) btn.textContent = theme === "light" ? "🌙" : "☀️";
-  if (typeof renderAll === "function" && CURRENT_RUN) renderAll();
+  if (CURRENT_RUN) renderAll();
 }
 function initTheme() {
   const saved = localStorage.getItem("bench-theme");
@@ -18,16 +28,6 @@ function initTheme() {
   });
 }
 initTheme();
-
-let DATA = null;
-let CURRENT_RUN = null;
-let SELECTED_MODELS = new Set();
-let CURRENT_TEST = null;
-const charts = {};
-
-function getCssVar(name) {
-  return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || "";
-}
 
 /* ---------- bootstrap ---------- */
 async function load() {
