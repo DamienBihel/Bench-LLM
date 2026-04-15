@@ -1,0 +1,31 @@
+model,test_id,test_label,duree_s,eval_duration_s,eval_count,tokens_per_s
+"gemma4:latest","01_francais","Francais pur (style + accents)",123,96.63,692,7.1
+"gemma4:latest","02_raisonnement","Raisonnement logique",54,51.36,378,7.3
+"gemma4:latest","03_json","Extraction JSON structuree",72,67.33,494,7.3
+"gemma4:latest","04_resume","Resume business (brief client)",108,102.50,738,7.2
+"gemma4:latest","05_code","Code Python",14,11.15,84,7.5
+"gemma4:latest","06_hallu_vectara","Hallucination — methode Vectara",94,88.02,630,7.1
+"gemma4:latest","07_ifeval_contraintes","IFEval — contraintes multiples combinees",103,99.38,597,6.0
+"gemma4:latest","08_tool_calling_nocodb","Tool calling — nocodb CLI",32,17.62,49,2.7
+"gemma4:latest","09_challenger_decision","Calibration — challenger une decision",489,481.35,1286,2.6
+"gemma4:latest","10_post_linkedin_ton","Redaction — post LinkedIn ton Damien",203,197.44,919,4.6
+"ministral-3:8b","01_francais","Francais pur (style + accents)",74,8.18,36,4.4
+"ministral-3:8b","02_raisonnement","Raisonnement logique",5,.43,3,7.5
+"ministral-3:8b","03_json","Extraction JSON structuree",21,13.63,63,4.6
+"ministral-3:8b","04_resume","Resume business (brief client)",61,51.75,233,4.5
+"ministral-3:8b","05_code","Code Python",26,21.22,100,4.7
+"ministral-3:8b","06_hallu_vectara","Hallucination — methode Vectara",38,27.60,126,4.5
+"ministral-3:8b","07_ifeval_contraintes","IFEval — contraintes multiples combinees",23,16.95,77,4.5
+"ministral-3:8b","08_tool_calling_nocodb","Tool calling — nocodb CLI",23,10.64,49,4.6
+"ministral-3:8b","09_challenger_decision","Calibration — challenger une decision",403,396.85,814,2.0
+"ministral-3:8b","10_post_linkedin_ton","Redaction — post LinkedIn ton Damien",185,166.45,334,2.0
+"gpt-oss:20b","01_francais","Francais pur (style + accents)",339,278.05,472,1.6
+"gpt-oss:20b","02_raisonnement","Raisonnement logique",94,71.97,111,1.5
+"gpt-oss:20b","03_json","Extraction JSON structuree",403,375.08,267,.7
+"gpt-oss:20b","04_resume","Resume business (brief client)",122,97.23,327,3.3
+"gpt-oss:20b","05_code","Code Python",200,175.94,294,1.6
+"gpt-oss:20b","06_hallu_vectara","Hallucination — methode Vectara",178,148.30,340,2.2
+"gpt-oss:20b","07_ifeval_contraintes","IFEval — contraintes multiples combinees",222,193.43,471,2.4
+"gpt-oss:20b","08_tool_calling_nocodb","Tool calling — nocodb CLI",221,190.61,446,2.3
+"gpt-oss:20b","09_challenger_decision","Calibration — challenger une decision",618,598.25,3068,5.1
+"gpt-oss:20b","10_post_linkedin_ton","Redaction — post LinkedIn ton Damien",266,241.75,1215,5.0

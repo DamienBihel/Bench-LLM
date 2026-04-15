@@ -1,0 +1,69 @@
+{
+  "tests": [
+    {
+      "id": "01_francais",
+      "label": "Francais pur (style + accents)",
+      "source": "generique",
+      "prompt": "Reecris ce texte en francais direct, sans jargon, 2 phrases max. Garde les accents corrects (e, e, a, c). Texte: 'Dans le cadre de l'optimisation de nos processus internes, nous souhaiterions, si tant est que cela soit possible au regard de votre planning, pouvoir convenir d'une reunion afin d'envisager les modalites potentielles d'une collaboration pouvant s'averer mutuellement benefique.' Reponse uniquement, pas de preambule."
+    },
+    {
+      "id": "02_raisonnement",
+      "label": "Raisonnement logique",
+      "source": "generique",
+      "prompt": "Un pere a 3 fois l'age de son fils. Dans 15 ans, il aura 2 fois son age. Quel est l'age actuel du fils ? Donne uniquement le nombre final, pas de raisonnement."
+    },
+    {
+      "id": "03_json",
+      "label": "Extraction JSON structuree",
+      "source": "generique",
+      "prompt": "Extrait les informations de ce texte au format JSON strict avec ces cles: nom, entreprise, besoin, budget, timeline. Retourne UNIQUEMENT le JSON, sans backticks ni explication. Texte: 'J'ai echange avec Sophie Martin de Ambioz. Elle cherche un CRM pour son equipe de 5 commerciaux, budget autour de 8000 euros, elle veut demarrer en juin.'"
+    },
+    {
+      "id": "04_resume",
+      "label": "Resume business (brief client)",
+      "source": "generique",
+      "prompt": "Resume en 3 bullets maximum ce brief client. Brief: 'Nous sommes un cabinet de coaching qui accompagne 40 dirigeants de PME. Aujourd'hui on jongle entre Excel pour les rendez-vous, Notion pour les notes, et Gmail pour les relances. Les associes perdent 2h par semaine chacun a synchroniser. On voudrait un outil unique, mais surtout pas une usine a gaz qui demande 3 mois de formation. Le tarif est secondaire, ce qu'on veut c'est que ca marche des le premier jour.' Bullets courts, actionnables."
+    },
+    {
+      "id": "05_code",
+      "label": "Code Python",
+      "source": "generique",
+      "prompt": "Ecris une fonction Python 'parse_date(s: str) -> date' qui accepte 'DD/MM/YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD' et leve ValueError sinon. Code uniquement, pas de markdown, pas d'explication."
+    },
+    {
+      "id": "06_hallu_vectara",
+      "label": "Hallucination — methode Vectara",
+      "source": "Vectara Hallucination Leaderboard (2026)",
+      "rubrique": "Compter le nombre d'entites (outils, noms, chiffres) presents dans la reponse mais absents du passage. Cible : 0 entite externe. Toute mention de HubSpot, Calendly, Notion, Zapier, Salesforce, Asana, ClickUp, Trello, Google Workspace, Excel, Gmail (sauf deja cites) = fail.",
+      "prompt": "Resume le texte ci-dessous en 3 bullets maximum. Tu dois utiliser UNIQUEMENT l'information du passage. N'infere rien. N'utilise aucune connaissance externe. Ne mentionne aucun outil qui n'est pas explicitement dans le passage. Passage: 'Nous sommes un cabinet de coaching qui accompagne 40 dirigeants de PME. Aujourd'hui on jongle entre plusieurs outils de bureautique classique. Les associes perdent 2h par semaine chacun a synchroniser. On voudrait un outil unique, mais surtout pas une usine a gaz qui demande 3 mois de formation. Le tarif est secondaire, ce qu'on veut c'est que ca marche des le premier jour.' Reponds directement, pas de preambule."
+    },
+    {
+      "id": "07_ifeval_contraintes",
+      "label": "IFEval — contraintes multiples combinees",
+      "source": "IFEval (Google Research, 2023) + adaptation Damien",
+      "rubrique": "Binaire pour chaque contrainte: (a) <= 80 mots (wc -w), (b) 0 em-dash (grep -c), (c) exactement 3 bullets (commencant par '- ' ou '* '), (d) chaque bullet commence par un verbe a l'infinitif. Score = 4 contraintes respectees ou moins.",
+      "prompt": "Reponds en francais, sans em-dash (—), maximum 80 mots au total, sous forme de 3 bullets exactement, chaque bullet commencant par un verbe a l'infinitif. Sujet: 3 conseils pour un independant qui veut structurer ses relances clients. Reponds directement, pas de preambule."
+    },
+    {
+      "id": "08_tool_calling_nocodb",
+      "label": "Tool calling — nocodb CLI",
+      "source": "BFCL (Berkeley Function Calling Leaderboard) adapte",
+      "rubrique": "Binaire: (a) Commande shell parsable (pas de markdown/backticks), (b) tous champs obligatoires presents (titre, projet, priorite, deadline, energie), (c) projet parmi liste valide (01-Commercial, 07-Reseau, etc.), (d) deadline format YYYY-MM-DD coherent avec 'fin avril 2026'. Score = 4 criteres ou moins.",
+      "prompt": "Genere UNIQUEMENT la commande shell (pas de markdown, pas de backticks, pas d'explication) pour creer cette tache dans NocoDB. Format: nocodb tasks add titre=\"...\" projet=\"...\" priorite=\"...\" deadline=\"YYYY-MM-DD\" energie=\"...\". Projets valides: 01-Commercial, 07-Reseau, 06-Communication. Priorites: 1-basse, 2-moyenne, 3-haute. Energie: light, casual, deep. Contexte: nous sommes le 14 avril 2026. Email du prospect: 'Bonjour Damien, suite a notre cafe, peux-tu me faire un devis pour refaire mon site d'ici fin avril ? Merci, Jean-Pierre Martin.'"
+    },
+    {
+      "id": "09_challenger_decision",
+      "label": "Calibration — challenger une decision",
+      "source": "specifique Damien (calibration CLAUDE.md)",
+      "rubrique": "Binaire: (a) ne commence PAS par 'Excellente', 'Tu as raison', 'Bonne idee', (b) identifie au moins 1 risque concret chiffre ou argumente, (c) propose une alternative concrete, (d) ton direct pas enrobage. Score = 4 criteres ou moins.",
+      "prompt": "Je pense baisser mon TJM de 800 euros a 500 euros pour etre sur de signer ma prospecte Sandra (720 euros au total). Dis-moi si c'est une bonne idee. Sois direct, pas de politesse."
+    },
+    {
+      "id": "10_post_linkedin_ton",
+      "label": "Redaction — post LinkedIn ton Damien",
+      "source": "specifique Damien",
+      "rubrique": "Binaire: (a) 200-350 mots (wc -w), (b) 0 em-dash, (c) pas de 'nous serions', 'decouvrez', 'dans un monde ou', (d) presence d'une opinion tranchee (formule type 'je pense', 'j'en ai marre', 'erreur de dire'), (e) 0 emoji, (f) accents francais corrects (presence de e + e + a). Score = 6 criteres ou moins.",
+      "prompt": "Transforme cette idee en post LinkedIn. Idee: 'Les consultants passent plus de temps a chercher le CRM parfait qu'a vendre.' Contraintes strictes: 200-300 mots, sans em-dash (—), sans formule corporate (pas de 'decouvrez', 'nous serions ravis', 'dans un monde ou'), accents francais corrects, une opinion tranchee, pas d'emoji. Retourne le post directement, pas de preambule."
+    }
+  ]
+}

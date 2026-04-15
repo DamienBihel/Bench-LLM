@@ -1,0 +1,16 @@
+model,test_id,test_label,duree_s,eval_duration_s,eval_count,tokens_per_s
+"gemma4:latest","01_francais","Francais pur (style + accents)",38,7.97,41,5.1
+"gemma4:latest","02_raisonnement","Raisonnement logique",58,55.87,378,6.7
+"gemma4:latest","03_json","Extraction JSON structuree",66,61.69,408,6.6
+"gemma4:latest","04_resume","Resume business (brief client)",92,86.55,637,7.3
+"gemma4:latest","05_code","Code Python",17,13.84,104,7.5
+"ministral-3:8b","01_francais","Francais pur (style + accents)",63,5.80,29,5.0
+"ministral-3:8b","02_raisonnement","Raisonnement logique",4,0.41,3,7.5
+"ministral-3:8b","03_json","Extraction JSON structuree",18,11.02,55,5.0
+"ministral-3:8b","04_resume","Resume business (brief client)",39,30.70,151,4.9
+"ministral-3:8b","05_code","Code Python",31,27.17,135,4.9
+"gpt-oss:20b","01_francais","Francais pur (style + accents)",191,139.56,322,2.3
+"gpt-oss:20b","02_raisonnement","Raisonnement logique",209,186.58,132,0.7
+"gpt-oss:20b","03_json","Extraction JSON structuree",251,219.62,430,1.9
+"gpt-oss:20b","04_resume","Resume business (brief client)",530,512.69,1810,3.5
+"gpt-oss:20b","05_code","Code Python",147,121.27,300,2.4
