@@ -79,5 +79,15 @@
     "thinking": false,
     "multimodal": false,
     "notes": "Nemo architecture, Tekken tokenizer"
+  },
+  "mixtral:8x7b": {
+    "params": "46.7B (13B actifs)",
+    "params_billions": 46.7,
+    "size_gb": 24.6,
+    "quantization": "Q4_0",
+    "context": "32k",
+    "thinking": false,
+    "multimodal": false,
+    "notes": "MoE 8 experts. TENTE le 2026-04-15, echec : swap massif sur 16 Go RAM, tous les tests timeout a 600s"
   }
 }
