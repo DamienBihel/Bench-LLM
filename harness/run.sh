@@ -5,8 +5,14 @@
 
 set -u
 
-# Parametres
-MODELS=("gemma4:latest" "ministral-3:8b" "gpt-oss:20b")
+# Parametres — MODELS_OVERRIDE (env var, espaces) pour ne relancer que certains modeles
+if [ -n "${MODELS_OVERRIDE:-}" ]; then
+  read -ra MODELS <<< "$MODELS_OVERRIDE"
+  APPEND_MODE=true
+else
+  MODELS=("gemma4:latest" "ministral-3:8b" "gpt-oss:20b")
+  APPEND_MODE=false
+fi
 HARNESS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BENCH_ROOT="$(dirname "$HARNESS_DIR")"
 PROMPTS_FILE="$HARNESS_DIR/prompts.json"
@@ -31,7 +37,9 @@ echo ""
 
 TESTS_COUNT=$(jq '.tests | length' "$PROMPTS_FILE")
 OVERALL_CSV="$RUN_DIR/_metrics.csv"
-echo "model,test_id,test_label,duree_s,eval_duration_s,eval_count,tokens_per_s,thinking_chars,response_chars" > "$OVERALL_CSV"
+if [ "$APPEND_MODE" = "false" ] || [ ! -f "$OVERALL_CSV" ]; then
+  echo "model,test_id,test_label,duree_s,eval_duration_s,eval_count,tokens_per_s,thinking_chars,response_chars" > "$OVERALL_CSV"
+fi
 
 for model in "${MODELS[@]}"; do
   MODEL_SAFE=$(echo "$model" | tr ':/' '__')
@@ -48,6 +56,22 @@ for model in "${MODELS[@]}"; do
   echo "  MODELE : $model"
   echo "───────────────────────────────────────────"
 
+  # Detection support thinking (probe 1-token)
+  PROBE=$(curl -s http://localhost:11434/api/generate \
+    -d "$(jq -n --arg m "$model" '{model:$m, prompt:"hi", stream:false, think:true, options:{num_predict:1}}')")
+  if echo "$PROBE" | jq -r '.error // ""' | grep -qi 'thinking'; then
+    THINK_BOOL="false"
+    echo "  (thinking non supporte par ce modele)"
+  else
+    THINK_BOOL="true"
+  fi
+
+  # Si on est en mode append, nettoyer les lignes existantes de ce modele du CSV
+  if [ "$APPEND_MODE" = "true" ] && [ -f "$OVERALL_CSV" ]; then
+    grep -v "^\"$model\"," "$OVERALL_CSV" > "$OVERALL_CSV.tmp"
+    mv "$OVERALL_CSV.tmp" "$OVERALL_CSV"
+  fi
+
   for i in $(seq 0 $((TESTS_COUNT - 1))); do
     ID=$(jq -r ".tests[$i].id" "$PROMPTS_FILE")
     LABEL=$(jq -r ".tests[$i].label" "$PROMPTS_FILE")
@@ -60,8 +84,8 @@ for model in "${MODELS[@]}"; do
 
     START=$(date +%s)
     RESP=$(curl -s http://localhost:11434/api/generate \
-      -d "$(jq -n --arg m "$model" --arg p "$PROMPT" \
-        '{model:$m, prompt:$p, stream:false, think:true, options:{temperature:0.2}}')")
+      -d "$(jq -n --arg m "$model" --arg p "$PROMPT" --argjson t "$THINK_BOOL" \
+        '{model:$m, prompt:$p, stream:false, think:$t, options:{temperature:0.2}}')")
     END=$(date +%s)
 
     DUR=$((END - START))

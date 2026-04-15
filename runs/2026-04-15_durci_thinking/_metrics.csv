@@ -1,0 +1,46 @@
+model,test_id,test_label,duree_s,eval_duration_s,eval_count,tokens_per_s,thinking_chars,response_chars
+"gemma4:latest","01_francais","Francais pur (style + accents)",104,75.65,536,7.0,1917,134
+"gemma4:latest","02_raisonnement","Raisonnement logique",86,82.20,625,7.6,1572,2
+"gemma4:latest","03_json","Extraction JSON structuree",93,88.41,662,7.4,2021,136
+"gemma4:latest","04_resume","Resume business (brief client)",92,86.97,683,7.8,2187,387
+"gemma4:latest","05_code","Code Python",17,12.66,101,8.0,0,352
+"gemma4:latest","06_hallu_vectara","Hallucination — methode Vectara",121,114.62,712,6.2,2433,303
+"gemma4:latest","07_ifeval_contraintes","IFEval — contraintes multiples combinees",96,90.85,634,6.9,1892,326
+"gemma4:latest","08_tool_calling_nocodb","Tool calling — nocodb CLI",13,6.61,51,7.7,0,150
+"gemma4:latest","09_challenger_decision","Calibration — challenger une decision",157,152.82,1089,7.1,1835,1813
+"gemma4:latest","10_post_linkedin_ton","Redaction — post LinkedIn ton Damien",155,146.84,915,6.2,1946,1552
+"gemma4:latest","11_hallu_chiffre_absent","Adversarial — refuser d'inventer un chiffre",42,39.32,281,7.1,1036,49
+"gemma4:latest","12_needle_haystack","Adversarial — info noyee dans long contexte",85,67.49,379,5.6,1385,64
+"gemma4:latest","13_tool_calling_info_manquante","Adversarial — refuser de generer si info manquante",76,69.66,519,7.4,1815,87
+"gemma4:latest","14_calcul_multistep","Adversarial — calcul multi-etapes avec piege",49,45.77,345,7.5,1083,11
+"gemma4:latest","15_prompt_injection","Adversarial — resistance prompt injection",53,48.96,362,7.4,1491,6
+"gpt-oss:20b","01_francais","Francais pur (style + accents)",329,273.11,390,1.4,1372,191
+"gpt-oss:20b","02_raisonnement","Raisonnement logique",79,57.63,117,2.0,252,2
+"gpt-oss:20b","03_json","Extraction JSON structuree",125,97.11,188,1.9,534,97
+"gpt-oss:20b","04_resume","Resume business (brief client)",225,203.44,642,3.1,1967,490
+"gpt-oss:20b","05_code","Code Python",135,106.64,356,3.3,786,597
+"gpt-oss:20b","06_hallu_vectara","Hallucination — methode Vectara",241,211.17,408,1.9,1347,381
+"gpt-oss:20b","07_ifeval_contraintes","IFEval — contraintes multiples combinees",153,133.01,396,2.9,1242,324
+"gpt-oss:20b","08_tool_calling_nocodb","Tool calling — nocodb CLI",602,576.14,457,.7,1549,143
+"gpt-oss:20b","09_challenger_decision","Calibration — challenger une decision",431,390.87,1217,3.1,3162,953
+"gpt-oss:20b","10_post_linkedin_ton","Redaction — post LinkedIn ton Damien",435,411.69,1376,3.3,4256,1456
+"gpt-oss:20b","11_hallu_chiffre_absent","Adversarial — refuser d'inventer un chiffre",126,115.13,266,2.3,1009,8
+"gpt-oss:20b","12_needle_haystack","Adversarial — info noyee dans long contexte",82,41.01,81,1.9,238,34
+"gpt-oss:20b","13_tool_calling_info_manquante","Adversarial — refuser de generer si info manquante",275,250.96,562,2.2,1959,234
+"gpt-oss:20b","14_calcul_multistep","Adversarial — calcul multi-etapes avec piege",114,97.42,158,1.6,420,57
+"gpt-oss:20b","15_prompt_injection","Adversarial — resistance prompt injection",235,212.28,348,1.6,1477,6
+"ministral-3:8b","01_francais","Francais pur (style + accents)",50,4.55,26,5.7,0,129
+"ministral-3:8b","02_raisonnement","Raisonnement logique",4,.41,3,7.5,0,2
+"ministral-3:8b","03_json","Extraction JSON structuree",27,17.79,64,3.6,0,170
+"ministral-3:8b","04_resume","Resume business (brief client)",30,19.48,86,4.4,0,325
+"ministral-3:8b","05_code","Code Python",39,31.03,142,4.5,0,523
+"ministral-3:8b","06_hallu_vectara","Hallucination — methode Vectara",31,20.47,103,5.0,0,455
+"ministral-3:8b","07_ifeval_contraintes","IFEval — contraintes multiples combinees",23,16.42,83,5.0,0,310
+"ministral-3:8b","08_tool_calling_nocodb","Tool calling — nocodb CLI",21,9.57,49,5.1,0,149
+"ministral-3:8b","09_challenger_decision","Calibration — challenger une decision",117,111.27,550,4.9,0,1330
+"ministral-3:8b","10_post_linkedin_ton","Redaction — post LinkedIn ton Damien",83,75.01,349,4.6,0,1472
+"ministral-3:8b","11_hallu_chiffre_absent","Adversarial — refuser d'inventer un chiffre",6,.57,4,8.0,0,3
+"ministral-3:8b","12_needle_haystack","Adversarial — info noyee dans long contexte",31,4.26,21,5.0,0,66
+"ministral-3:8b","13_tool_calling_info_manquante","Adversarial — refuser de generer si info manquante",76,64.73,327,5.0,0,1133
+"ministral-3:8b","14_calcul_multistep","Adversarial — calcul multi-etapes avec piege",8,3.28,18,5.6,0,55
+"ministral-3:8b","15_prompt_injection","Adversarial — resistance prompt injection",14,7.69,40,5.2,0,151
