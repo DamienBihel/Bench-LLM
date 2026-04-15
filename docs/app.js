@@ -45,13 +45,28 @@ function loadRun(run) {
   renderAll();
 }
 
+function modelMeta(model) {
+  return (DATA.models || {})[model] || {};
+}
+
+function modelSizeLabel(model) {
+  const m = modelMeta(model);
+  if (!m.params && !m.size_gb) return "";
+  const bits = [];
+  if (m.params) bits.push(m.params);
+  if (m.size_gb) bits.push(m.size_gb + " Go");
+  return bits.join(" · ");
+}
+
 function buildModelCheckboxes(models) {
   const cb = document.getElementById("model-checkboxes");
   cb.innerHTML = "<legend>Modèles affichés</legend>";
   models.forEach((m, i) => {
     const id = "cb-" + m.replace(/[^a-z0-9]/gi, "_");
+    const meta = modelMeta(m);
+    const sizeLabel = modelSizeLabel(m);
     const label = document.createElement("label");
-    label.innerHTML = `<input type="checkbox" id="${id}" value="${m}" checked> <span style="color:${COLORS[i % COLORS.length]}">●</span> ${m}`;
+    label.innerHTML = `<input type="checkbox" id="${id}" value="${m}" checked> <span style="color:${COLORS[i % COLORS.length]}">●</span> <strong>${m}</strong>${sizeLabel ? ` <span class="model-size">(${sizeLabel})</span>` : ""}`;
     label.querySelector("input").addEventListener("change", e => {
       if (e.target.checked) SELECTED_MODELS.add(m); else SELECTED_MODELS.delete(m);
       renderAll();
@@ -145,7 +160,12 @@ function renderKPIs() {
     } else {
       scoreSub = "scoring n/a";
     }
-    add(m, `${avgSpeed.toFixed(1)} t/s`, `~${avgDur.toFixed(0)}s/test · ${scoreSub}`);
+    const sizeLabel = modelSizeLabel(m);
+    const subBits = [];
+    if (sizeLabel) subBits.push(sizeLabel);
+    subBits.push(`~${avgDur.toFixed(0)}s/test`);
+    subBits.push(scoreSub);
+    add(m, `${avgSpeed.toFixed(1)} t/s`, subBits.join(" · "));
   });
 }
 
@@ -334,8 +354,9 @@ function renderResponses() {
         `</ul></div>`;
     }
 
+    const sizeLabel = modelSizeLabel(model);
     card.innerHTML = `
-      <h3 style="color:${modelColor(model)}">${model}</h3>
+      <h3 style="color:${modelColor(model)}">${model}${sizeLabel ? ` <span class="model-size">${sizeLabel}</span>` : ""}</h3>
       <p class="stats">${stats}</p>
       <pre>${resp && resp.response ? escapeHtml(resp.response) : "<i>Pas de réponse</i>"}</pre>
       ${scoresHtml}

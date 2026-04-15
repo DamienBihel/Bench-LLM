@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 RUNS_DIR = ROOT / "runs"
 PROMPTS = ROOT / "harness" / "prompts.json"
+MODELS_META = ROOT / "harness" / "models.json"
 OUT = ROOT / "docs" / "data.json"
 
 
@@ -56,9 +57,16 @@ def parse_response_md(path: Path, label_map: dict[str, str]) -> tuple[str, list[
     return model, responses
 
 
+def load_models_meta() -> dict:
+    if not MODELS_META.exists():
+        return {}
+    return json.loads(MODELS_META.read_text(encoding="utf-8"))
+
+
 def build() -> dict:
     prompts = load_prompts()
     label_map = label_to_id(prompts)
+    models_meta = load_models_meta()
 
     runs = []
     for run_dir in sorted(RUNS_DIR.iterdir()):
@@ -96,6 +104,7 @@ def build() -> dict:
 
     return {
         "prompts": prompts,
+        "models": models_meta,
         "runs": runs,
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }

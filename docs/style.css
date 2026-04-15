@@ -83,6 +83,7 @@ fieldset label {
   font-size: .85rem;
 }
 fieldset input[type="checkbox"] { accent-color: var(--accent); }
+.model-size { color: var(--muted); font-size: .75rem; font-weight: 400; }
 
 /* === KPIs === */
 .kpis {
