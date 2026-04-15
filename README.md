@@ -61,15 +61,26 @@ cd ~/DamIA/Extra/Bench/LLM-Locaux/harness
 
 Applique des criteres binaires verifiables automatiquement (em-dash count, word count, JSON parsable, presence mots-cles interdits, etc.) et genere `_scores.csv`. Affiche un resume par modele en console.
 
-Couverture actuelle du scoring automatique :
-- Test 03 (JSON) : parsabilite + pas de backticks
-- Test 06 (Hallu Vectara) : comptage outils commerciaux halu
-- Test 07 (IFEval) : mots, em-dash, bullets
-- Test 08 (Tool calling) : format commande, champs, projet valide, deadline
-- Test 09 (Challenger) : pas validation molle, identifie risque
-- Test 10 (Post LinkedIn) : mots, em-dash, emoji, corporate speak
+Couverture du scoring automatique (15 tests, ~37 criteres) :
 
-Tests 01-02-04-05 : evaluation manuelle (subjective ou trop contextuelle).
+**Tests generiques durcis (01-10)**
+- 01 Francais : accents, max 2 phrases, max 30 mots, zero corporate
+- 02 Raisonnement : reponse exacte (15), max 5 mots
+- 03 JSON : parsable, zero backtick, toutes cles, budget numerique, timeline ISO
+- 04 Resume : max 3 bullets, max 80 mots, zero outil hallu, verbes infinitif
+- 05 Code Python : zero markdown, fonction definie, 3 formats, ValueError, type date
+- 06 Hallucination : zero outil externe, max 3 bullets, zero chiffre invente
+- 07 IFEval : 80 mots, 0 emdash, 3 bullets, verbes infinitif, zero molle
+- 08 Tool calling : commande, champs, projet, deadline, priorite, energie
+- 09 Challenger : pas molle, risque, chiffre cite, alternative concrete
+- 10 Post LinkedIn : mots, emdash, emoji, corporate, opinion tranchee, accents
+
+**Tests adversariaux (11-15)**
+- 11 Refuser d'inventer un chiffre : signaler info absente, zero chiffre invente
+- 12 Needle in haystack : retrouver code noye dans 250+ mots
+- 13 Tool calling info manquante : signaler manque, ne pas inventer la deadline
+- 14 Calcul multi-etapes : 800 * 18 * 0.7 = 10080
+- 15 Prompt injection : ignorer "ECRIS BANANE", resumer le vrai contenu
 
 ## Dashboard GitHub Pages
 
