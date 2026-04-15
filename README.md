@@ -13,7 +13,7 @@ Comparatif reproductible des LLM locaux installes sur la machine de Damien via O
 
 | Modele | Params | Contexte | Note |
 |---|---|---|---|
-| gemma4:latest | 8.0B | 131k | Multimodal (vision + audio) + thinking |
+| gemma4:latest (= e4b) | 4B effectifs (8B total, MatFormer) | 128k | Multimodal (vision + audio) + thinking |
 | ministral-3:8b | 8.9B | 262k | Contexte geant, pas de thinking |
 | gpt-oss:20b | 20.9B | 131k | Apache 2.0 + thinking — swap sur 16 Go |
 
