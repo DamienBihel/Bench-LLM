@@ -1,0 +1,782 @@
+{
+  "runs": [
+    {
+      "name": "2026-04-14_baseline",
+      "date": "2026-04-14",
+      "metrics": [
+        {
+          "model": "gemma4:latest",
+          "test_id": "01_francais",
+          "test_label": "Francais pur (style + accents)",
+          "duree_s": 38.0,
+          "eval_duration_s": 7.97,
+          "eval_count": 41.0,
+          "tokens_per_s": 5.1
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "02_raisonnement",
+          "test_label": "Raisonnement logique",
+          "duree_s": 58.0,
+          "eval_duration_s": 55.87,
+          "eval_count": 378.0,
+          "tokens_per_s": 6.7
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "03_json",
+          "test_label": "Extraction JSON structuree",
+          "duree_s": 66.0,
+          "eval_duration_s": 61.69,
+          "eval_count": 408.0,
+          "tokens_per_s": 6.6
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "04_resume",
+          "test_label": "Resume business (brief client)",
+          "duree_s": 92.0,
+          "eval_duration_s": 86.55,
+          "eval_count": 637.0,
+          "tokens_per_s": 7.3
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "05_code",
+          "test_label": "Code Python",
+          "duree_s": 17.0,
+          "eval_duration_s": 13.84,
+          "eval_count": 104.0,
+          "tokens_per_s": 7.5
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "01_francais",
+          "test_label": "Francais pur (style + accents)",
+          "duree_s": 63.0,
+          "eval_duration_s": 5.8,
+          "eval_count": 29.0,
+          "tokens_per_s": 5.0
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "02_raisonnement",
+          "test_label": "Raisonnement logique",
+          "duree_s": 4.0,
+          "eval_duration_s": 0.41,
+          "eval_count": 3.0,
+          "tokens_per_s": 7.5
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "03_json",
+          "test_label": "Extraction JSON structuree",
+          "duree_s": 18.0,
+          "eval_duration_s": 11.02,
+          "eval_count": 55.0,
+          "tokens_per_s": 5.0
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "04_resume",
+          "test_label": "Resume business (brief client)",
+          "duree_s": 39.0,
+          "eval_duration_s": 30.7,
+          "eval_count": 151.0,
+          "tokens_per_s": 4.9
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "05_code",
+          "test_label": "Code Python",
+          "duree_s": 31.0,
+          "eval_duration_s": 27.17,
+          "eval_count": 135.0,
+          "tokens_per_s": 4.9
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "01_francais",
+          "test_label": "Francais pur (style + accents)",
+          "duree_s": 191.0,
+          "eval_duration_s": 139.56,
+          "eval_count": 322.0,
+          "tokens_per_s": 2.3
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "02_raisonnement",
+          "test_label": "Raisonnement logique",
+          "duree_s": 209.0,
+          "eval_duration_s": 186.58,
+          "eval_count": 132.0,
+          "tokens_per_s": 0.7
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "03_json",
+          "test_label": "Extraction JSON structuree",
+          "duree_s": 251.0,
+          "eval_duration_s": 219.62,
+          "eval_count": 430.0,
+          "tokens_per_s": 1.9
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "04_resume",
+          "test_label": "Resume business (brief client)",
+          "duree_s": 530.0,
+          "eval_duration_s": 512.69,
+          "eval_count": 1810.0,
+          "tokens_per_s": 3.5
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "05_code",
+          "test_label": "Code Python",
+          "duree_s": 147.0,
+          "eval_duration_s": 121.27,
+          "eval_count": 300.0,
+          "tokens_per_s": 2.4
+        }
+      ],
+      "scores": []
+    },
+    {
+      "name": "2026-04-14_v2_enrichi",
+      "date": "2026-04-14",
+      "metrics": [
+        {
+          "model": "gemma4:latest",
+          "test_id": "01_francais",
+          "test_label": "Francais pur (style + accents)",
+          "duree_s": 123.0,
+          "eval_duration_s": 96.63,
+          "eval_count": 692.0,
+          "tokens_per_s": 7.1
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "02_raisonnement",
+          "test_label": "Raisonnement logique",
+          "duree_s": 54.0,
+          "eval_duration_s": 51.36,
+          "eval_count": 378.0,
+          "tokens_per_s": 7.3
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "03_json",
+          "test_label": "Extraction JSON structuree",
+          "duree_s": 72.0,
+          "eval_duration_s": 67.33,
+          "eval_count": 494.0,
+          "tokens_per_s": 7.3
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "04_resume",
+          "test_label": "Resume business (brief client)",
+          "duree_s": 108.0,
+          "eval_duration_s": 102.5,
+          "eval_count": 738.0,
+          "tokens_per_s": 7.2
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "05_code",
+          "test_label": "Code Python",
+          "duree_s": 14.0,
+          "eval_duration_s": 11.15,
+          "eval_count": 84.0,
+          "tokens_per_s": 7.5
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "06_hallu_vectara",
+          "test_label": "Hallucination — methode Vectara",
+          "duree_s": 94.0,
+          "eval_duration_s": 88.02,
+          "eval_count": 630.0,
+          "tokens_per_s": 7.1
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "07_ifeval_contraintes",
+          "test_label": "IFEval — contraintes multiples combinees",
+          "duree_s": 103.0,
+          "eval_duration_s": 99.38,
+          "eval_count": 597.0,
+          "tokens_per_s": 6.0
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "08_tool_calling_nocodb",
+          "test_label": "Tool calling — nocodb CLI",
+          "duree_s": 32.0,
+          "eval_duration_s": 17.62,
+          "eval_count": 49.0,
+          "tokens_per_s": 2.7
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "09_challenger_decision",
+          "test_label": "Calibration — challenger une decision",
+          "duree_s": 489.0,
+          "eval_duration_s": 481.35,
+          "eval_count": 1286.0,
+          "tokens_per_s": 2.6
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "10_post_linkedin_ton",
+          "test_label": "Redaction — post LinkedIn ton Damien",
+          "duree_s": 203.0,
+          "eval_duration_s": 197.44,
+          "eval_count": 919.0,
+          "tokens_per_s": 4.6
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "01_francais",
+          "test_label": "Francais pur (style + accents)",
+          "duree_s": 74.0,
+          "eval_duration_s": 8.18,
+          "eval_count": 36.0,
+          "tokens_per_s": 4.4
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "02_raisonnement",
+          "test_label": "Raisonnement logique",
+          "duree_s": 5.0,
+          "eval_duration_s": 0.43,
+          "eval_count": 3.0,
+          "tokens_per_s": 7.5
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "03_json",
+          "test_label": "Extraction JSON structuree",
+          "duree_s": 21.0,
+          "eval_duration_s": 13.63,
+          "eval_count": 63.0,
+          "tokens_per_s": 4.6
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "04_resume",
+          "test_label": "Resume business (brief client)",
+          "duree_s": 61.0,
+          "eval_duration_s": 51.75,
+          "eval_count": 233.0,
+          "tokens_per_s": 4.5
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "05_code",
+          "test_label": "Code Python",
+          "duree_s": 26.0,
+          "eval_duration_s": 21.22,
+          "eval_count": 100.0,
+          "tokens_per_s": 4.7
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "06_hallu_vectara",
+          "test_label": "Hallucination — methode Vectara",
+          "duree_s": 38.0,
+          "eval_duration_s": 27.6,
+          "eval_count": 126.0,
+          "tokens_per_s": 4.5
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "07_ifeval_contraintes",
+          "test_label": "IFEval — contraintes multiples combinees",
+          "duree_s": 23.0,
+          "eval_duration_s": 16.95,
+          "eval_count": 77.0,
+          "tokens_per_s": 4.5
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "08_tool_calling_nocodb",
+          "test_label": "Tool calling — nocodb CLI",
+          "duree_s": 23.0,
+          "eval_duration_s": 10.64,
+          "eval_count": 49.0,
+          "tokens_per_s": 4.6
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "09_challenger_decision",
+          "test_label": "Calibration — challenger une decision",
+          "duree_s": 403.0,
+          "eval_duration_s": 396.85,
+          "eval_count": 814.0,
+          "tokens_per_s": 2.0
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "10_post_linkedin_ton",
+          "test_label": "Redaction — post LinkedIn ton Damien",
+          "duree_s": 185.0,
+          "eval_duration_s": 166.45,
+          "eval_count": 334.0,
+          "tokens_per_s": 2.0
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "01_francais",
+          "test_label": "Francais pur (style + accents)",
+          "duree_s": 339.0,
+          "eval_duration_s": 278.05,
+          "eval_count": 472.0,
+          "tokens_per_s": 1.6
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "02_raisonnement",
+          "test_label": "Raisonnement logique",
+          "duree_s": 94.0,
+          "eval_duration_s": 71.97,
+          "eval_count": 111.0,
+          "tokens_per_s": 1.5
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "03_json",
+          "test_label": "Extraction JSON structuree",
+          "duree_s": 403.0,
+          "eval_duration_s": 375.08,
+          "eval_count": 267.0,
+          "tokens_per_s": 0.7
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "04_resume",
+          "test_label": "Resume business (brief client)",
+          "duree_s": 122.0,
+          "eval_duration_s": 97.23,
+          "eval_count": 327.0,
+          "tokens_per_s": 3.3
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "05_code",
+          "test_label": "Code Python",
+          "duree_s": 200.0,
+          "eval_duration_s": 175.94,
+          "eval_count": 294.0,
+          "tokens_per_s": 1.6
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "06_hallu_vectara",
+          "test_label": "Hallucination — methode Vectara",
+          "duree_s": 178.0,
+          "eval_duration_s": 148.3,
+          "eval_count": 340.0,
+          "tokens_per_s": 2.2
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "07_ifeval_contraintes",
+          "test_label": "IFEval — contraintes multiples combinees",
+          "duree_s": 222.0,
+          "eval_duration_s": 193.43,
+          "eval_count": 471.0,
+          "tokens_per_s": 2.4
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "08_tool_calling_nocodb",
+          "test_label": "Tool calling — nocodb CLI",
+          "duree_s": 221.0,
+          "eval_duration_s": 190.61,
+          "eval_count": 446.0,
+          "tokens_per_s": 2.3
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "09_challenger_decision",
+          "test_label": "Calibration — challenger une decision",
+          "duree_s": 618.0,
+          "eval_duration_s": 598.25,
+          "eval_count": 3068.0,
+          "tokens_per_s": 5.1
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "10_post_linkedin_ton",
+          "test_label": "Redaction — post LinkedIn ton Damien",
+          "duree_s": 266.0,
+          "eval_duration_s": 241.75,
+          "eval_count": 1215.0,
+          "tokens_per_s": 5.0
+        }
+      ],
+      "scores": [
+        {
+          "model": "gemma4:latest",
+          "test_id": "03_json",
+          "critere": "json_parsable",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "03_json",
+          "critere": "pas_de_backticks",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "06_hallu_vectara",
+          "critere": "zero_outil_externe",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "07_ifeval",
+          "critere": "max_80_mots",
+          "resultat": "PASS",
+          "detail": "65 mots"
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "07_ifeval",
+          "critere": "zero_emdash",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "07_ifeval",
+          "critere": "exactement_3_bullets",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "08_tool_calling",
+          "critere": "pas_de_backticks",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "08_tool_calling",
+          "critere": "commande_correcte",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "08_tool_calling",
+          "critere": "tous_champs_presents",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "08_tool_calling",
+          "critere": "projet_valide",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "08_tool_calling",
+          "critere": "deadline_format",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "09_challenger",
+          "critere": "pas_validation_molle",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "09_challenger",
+          "critere": "identifie_risque",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "10_linkedin",
+          "critere": "mots_200_350",
+          "resultat": "PASS",
+          "detail": "272 mots"
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "10_linkedin",
+          "critere": "zero_emdash",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "10_linkedin",
+          "critere": "zero_emoji",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "10_linkedin",
+          "critere": "pas_corporate",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "03_json",
+          "critere": "json_parsable",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "03_json",
+          "critere": "pas_de_backticks",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "06_hallu_vectara",
+          "critere": "zero_outil_externe",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "07_ifeval",
+          "critere": "max_80_mots",
+          "resultat": "PASS",
+          "detail": "53 mots"
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "07_ifeval",
+          "critere": "zero_emdash",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "07_ifeval",
+          "critere": "exactement_3_bullets",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "08_tool_calling",
+          "critere": "pas_de_backticks",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "08_tool_calling",
+          "critere": "commande_correcte",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "08_tool_calling",
+          "critere": "tous_champs_presents",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "08_tool_calling",
+          "critere": "projet_valide",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "08_tool_calling",
+          "critere": "deadline_format",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "09_challenger",
+          "critere": "pas_validation_molle",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "09_challenger",
+          "critere": "identifie_risque",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "10_linkedin",
+          "critere": "mots_200_350",
+          "resultat": "PASS",
+          "detail": "212 mots"
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "10_linkedin",
+          "critere": "zero_emdash",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "10_linkedin",
+          "critere": "zero_emoji",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "10_linkedin",
+          "critere": "pas_corporate",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "03_json",
+          "critere": "json_parsable",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "03_json",
+          "critere": "pas_de_backticks",
+          "resultat": "FAIL",
+          "detail": "backticks presents"
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "06_hallu_vectara",
+          "critere": "zero_outil_externe",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "07_ifeval",
+          "critere": "max_80_mots",
+          "resultat": "PASS",
+          "detail": "48 mots"
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "07_ifeval",
+          "critere": "zero_emdash",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "07_ifeval",
+          "critere": "exactement_3_bullets",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "08_tool_calling",
+          "critere": "pas_de_backticks",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "08_tool_calling",
+          "critere": "commande_correcte",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "08_tool_calling",
+          "critere": "tous_champs_presents",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "08_tool_calling",
+          "critere": "projet_valide",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "08_tool_calling",
+          "critere": "deadline_format",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "09_challenger",
+          "critere": "pas_validation_molle",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "09_challenger",
+          "critere": "identifie_risque",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "10_linkedin",
+          "critere": "mots_200_350",
+          "resultat": "PASS",
+          "detail": "242 mots"
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "10_linkedin",
+          "critere": "zero_emdash",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "10_linkedin",
+          "critere": "zero_emoji",
+          "resultat": "PASS",
+          "detail": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "10_linkedin",
+          "critere": "pas_corporate",
+          "resultat": "PASS",
+          "detail": ""
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-04-15T07:22:32+00:00"
+}

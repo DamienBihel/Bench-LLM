@@ -2,6 +2,8 @@
 
 Comparatif reproductible des LLM locaux installes sur la machine de Damien via Ollama.
 
+**Dashboard interactif** : https://damienbihel.github.io/Bench-LLM/ (deploye via GitHub Pages)
+
 ## Machine cible
 
 - MacBook Pro 16 Go RAM (avril 2026)
@@ -68,6 +70,17 @@ Couverture actuelle du scoring automatique :
 - Test 10 (Post LinkedIn) : mots, em-dash, emoji, corporate speak
 
 Tests 01-02-04-05 : evaluation manuelle (subjective ou trop contextuelle).
+
+## Dashboard GitHub Pages
+
+Les CSV (`_metrics.csv` + `_scores.csv`) de tous les runs sont agreges en JSON et rendus en graphiques (Chart.js) dans `docs/`.
+
+```bash
+python3 harness/build_dashboard.py   # regenere docs/data.json
+open docs/index.html                 # preview locale
+```
+
+Le workflow `.github/workflows/pages.yml` regenere et deploie automatiquement a chaque push sur master. Activer Pages dans Settings > Pages > Source : GitHub Actions.
 
 ## Ajouter un modele
 

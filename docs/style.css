@@ -1,0 +1,87 @@
+:root {
+  --bg: #0f1115;
+  --fg: #e7e9ee;
+  --muted: #9aa3b2;
+  --card: #171a21;
+  --border: #262a33;
+  --accent: #7cc4ff;
+  --pass: #4ade80;
+  --fail: #f87171;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.5;
+}
+header {
+  padding: 2rem 2rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+header h1 { margin: 0 0 .25rem; font-size: 1.5rem; }
+header .sub { margin: 0; color: var(--muted); }
+header .meta { margin: .5rem 0 0; color: var(--muted); font-size: .85rem; }
+header a { color: var(--accent); text-decoration: none; }
+.controls {
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+select {
+  background: var(--card);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  padding: .4rem .6rem;
+  border-radius: 6px;
+  font-size: .95rem;
+}
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  padding: 1.5rem 2rem 0;
+}
+.kpi {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+.kpi .label { color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
+.kpi .value { font-size: 1.4rem; font-weight: 600; margin-top: .25rem; }
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 1.5rem 2rem 2rem;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+.card.full { grid-column: 1 / -1; }
+.card h2 { margin: 0 0 .75rem; font-size: 1rem; color: var(--muted); font-weight: 500; }
+canvas { max-height: 380px; }
+#scores-table { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+th, td { padding: .4rem .6rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { color: var(--muted); font-weight: 500; }
+td.pass { color: var(--pass); }
+td.fail { color: var(--fail); font-weight: 600; }
+footer {
+  padding: 1.5rem 2rem 2rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .85rem;
+}
+footer code { background: var(--card); padding: .1rem .35rem; border-radius: 4px; }
+@media (max-width: 720px) {
+  .grid { grid-template-columns: 1fr; }
+  header, .controls, .grid, .kpis, footer { padding-left: 1rem; padding-right: 1rem; }
+}

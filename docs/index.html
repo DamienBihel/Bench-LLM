@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bench LLM locaux — Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Bench LLM locaux</h1>
+    <p class="sub">Comparatif reproductible Ollama — MacBook Pro 16 Go RAM</p>
+    <p class="meta">
+      <a href="https://github.com/damienbihel/Bench-LLM">Repo GitHub</a> ·
+      <span id="generated"></span>
+    </p>
+  </header>
+
+  <nav class="controls">
+    <label>Run :
+      <select id="run-select"></select>
+    </label>
+  </nav>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="grid">
+    <div class="card">
+      <h2>Vitesse (tokens/s) par test</h2>
+      <canvas id="chart-speed"></canvas>
+    </div>
+    <div class="card">
+      <h2>Durée totale (s) par test</h2>
+      <canvas id="chart-duration"></canvas>
+    </div>
+    <div class="card full">
+      <h2>Score binaire — % critères PASS par modèle</h2>
+      <canvas id="chart-scores"></canvas>
+    </div>
+    <div class="card full">
+      <h2>Détail critères (PASS / FAIL)</h2>
+      <div id="scores-table"></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Source : <code>runs/YYYY-MM-DD_tag/_metrics.csv</code> + <code>_scores.csv</code> — généré par <code>harness/build_dashboard.py</code>.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
