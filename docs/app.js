@@ -1,10 +1,33 @@
-const COLORS = ["#7cc4ff", "#f8b26a", "#b794f6", "#4ade80", "#f87171", "#fbbf24", "#34d399"];
+const COLORS = ["#7cc4ff", "#f8b26a", "#b794f6", "#4ade80", "#f87171", "#fbbf24", "#34d399", "#c084fc"];
+
+/* ---------- theme ---------- */
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("bench-theme", theme);
+  const btn = document.getElementById("theme-toggle");
+  if (btn) btn.textContent = theme === "light" ? "🌙" : "☀️";
+  if (typeof renderAll === "function" && CURRENT_RUN) renderAll();
+}
+function initTheme() {
+  const saved = localStorage.getItem("bench-theme");
+  const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+  applyTheme(saved || (prefersLight ? "light" : "dark"));
+  document.getElementById("theme-toggle")?.addEventListener("click", () => {
+    const cur = document.documentElement.getAttribute("data-theme");
+    applyTheme(cur === "light" ? "dark" : "light");
+  });
+}
+initTheme();
 
 let DATA = null;
 let CURRENT_RUN = null;
 let SELECTED_MODELS = new Set();
 let CURRENT_TEST = null;
 const charts = {};
+
+function getCssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || "";
+}
 
 /* ---------- bootstrap ---------- */
 async function load() {
@@ -197,12 +220,12 @@ function renderBarChart(id, field, yLabel) {
     options: {
       responsive: true,
       plugins: {
-        legend: { labels: { color: "#e7e9ee" } },
+        legend: { labels: { color: getCssVar("--fg") } },
         tooltip: { mode: "index", intersect: false },
       },
       scales: {
-        x: { ticks: { color: "#9aa3b2" }, grid: { color: "#262a33" } },
-        y: { ticks: { color: "#9aa3b2" }, grid: { color: "#262a33" }, title: { display: true, text: yLabel, color: "#9aa3b2" } },
+        x: { ticks: { color: getCssVar("--chart-tick") }, grid: { color: getCssVar("--chart-grid") } },
+        y: { ticks: { color: getCssVar("--chart-tick") }, grid: { color: getCssVar("--chart-grid") }, title: { display: true, text: yLabel, color: getCssVar("--chart-tick") } },
       },
     },
   });
@@ -236,8 +259,8 @@ function renderScoresChart() {
       responsive: true,
       plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.x + "% de critères PASS" } } },
       scales: {
-        x: { min: 0, max: 100, ticks: { color: "#9aa3b2", callback: v => v + "%" }, grid: { color: "#262a33" } },
-        y: { ticks: { color: "#9aa3b2" }, grid: { color: "#262a33" } },
+        x: { min: 0, max: 100, ticks: { color: getCssVar("--chart-tick"), callback: v => v + "%" }, grid: { color: getCssVar("--chart-grid") } },
+        y: { ticks: { color: getCssVar("--chart-tick") }, grid: { color: getCssVar("--chart-grid") } },
       },
     },
   });
