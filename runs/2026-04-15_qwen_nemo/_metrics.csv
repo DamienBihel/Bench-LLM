@@ -1,0 +1,76 @@
+model,test_id,test_label,duree_s,eval_duration_s,eval_count,tokens_per_s,thinking_chars,response_chars
+"qwen3:0.6b","01_francais","Francais pur (style + accents)",8,7.10,336,47.3,1164,145
+"qwen3:0.6b","02_raisonnement","Raisonnement logique",10,9.12,442,48.5,1215,2
+"qwen3:0.6b","03_json","Extraction JSON structuree",7,6.48,310,48.4,983,116
+"qwen3:0.6b","04_resume","Resume business (brief client)",9,7.25,331,45.9,973,368
+"qwen3:0.6b","05_code","Code Python",180,176.68,4096,23.1,18925,0
+"qwen3:0.6b","06_hallu_vectara","Hallucination — methode Vectara",7,5.48,240,44.4,812,204
+"qwen3:0.6b","07_ifeval_contraintes","IFEval — contraintes multiples combinees",7,5.21,232,44.6,724,145
+"qwen3:0.6b","08_tool_calling_nocodb","Tool calling — nocodb CLI",11,9.60,406,42.2,1094,339
+"qwen3:0.6b","09_challenger_decision","Calibration — challenger une decision",12,10.98,482,44.2,1136,644
+"qwen3:0.6b","10_post_linkedin_ton","Redaction — post LinkedIn ton Damien",9,7.89,348,44.6,816,599
+"qwen3:0.6b","11_hallu_chiffre_absent","Adversarial — refuser d'inventer un chiffre",4,3.15,150,48.3,606,2
+"qwen3:0.6b","12_needle_haystack","Adversarial — info noyee dans long contexte",6,2.99,124,42.7,470,34
+"qwen3:0.6b","13_tool_calling_info_manquante","Adversarial — refuser de generer si info manquante",15,14.06,477,34.0,1320,455
+"qwen3:0.6b","14_calcul_multistep","Adversarial — calcul multi-etapes avec piege",11,9.66,323,33.6,854,56
+"qwen3:0.6b","15_prompt_injection","Adversarial — resistance prompt injection",9,8.09,267,33.3,885,91
+"qwen3:1.7b","01_francais","Francais pur (style + accents)",62,58.96,771,13.0,3274,168
+"qwen3:1.7b","02_raisonnement","Raisonnement logique",57,54.47,713,13.1,2032,2
+"qwen3:1.7b","03_json","Extraction JSON structuree",31,28.93,367,12.6,1239,104
+"qwen3:1.7b","04_resume","Resume business (brief client)",26,23.30,293,12.5,976,233
+"qwen3:1.7b","05_code","Code Python",318,313.01,4096,13.0,15889,0
+"qwen3:1.7b","06_hallu_vectara","Hallucination — methode Vectara",7,3.26,62,19.3,0,200
+"qwen3:1.7b","07_ifeval_contraintes","IFEval — contraintes multiples combinees",17,15.39,287,18.7,1005,79
+"qwen3:1.7b","08_tool_calling_nocodb","Tool calling — nocodb CLI",36,32.45,549,16.9,1928,116
+"qwen3:1.7b","09_challenger_decision","Calibration — challenger une decision",61,58.77,1012,17.2,2967,511
+"qwen3:1.7b","10_post_linkedin_ton","Redaction — post LinkedIn ton Damien",22,19.57,365,18.7,967,577
+"qwen3:1.7b","11_hallu_chiffre_absent","Adversarial — refuser d'inventer un chiffre",20,18.58,352,19.0,1445,2
+"qwen3:1.7b","12_needle_haystack","Adversarial — info noyee dans long contexte",12,6.16,114,18.6,433,6
+"qwen3:1.7b","13_tool_calling_info_manquante","Adversarial — refuser de generer si info manquante",25,22.45,408,18.2,1758,138
+"qwen3:1.7b","14_calcul_multistep","Adversarial — calcul multi-etapes avec piege",27,25.87,474,18.3,1116,5
+"qwen3:1.7b","15_prompt_injection","Adversarial — resistance prompt injection",80,77.62,1337,17.2,4320,145
+"qwen3:4b","01_francais","Francais pur (style + accents)",94,90.47,774,8.5,3063,140
+"qwen3:4b","02_raisonnement","Raisonnement logique",45,42.68,386,9.0,1207,2
+"qwen3:4b","03_json","Extraction JSON structuree",133,128.22,1065,8.3,3373,154
+"qwen3:4b","04_resume","Resume business (brief client)",44,37.81,333,8.8,1150,178
+"qwen3:4b","05_code","Code Python",600,,,0,0,0
+"qwen3:4b","06_hallu_vectara","Hallucination — methode Vectara",59,52.57,402,7.6,1525,222
+"qwen3:4b","07_ifeval_contraintes","IFEval — contraintes multiples combinees",47,40.39,215,5.3,689,192
+"qwen3:4b","08_tool_calling_nocodb","Tool calling — nocodb CLI",116,107.24,591,5.5,2036,144
+"qwen3:4b","09_challenger_decision","Calibration — challenger une decision",197,191.88,1363,7.1,3844,806
+"qwen3:4b","10_post_linkedin_ton","Redaction — post LinkedIn ton Damien",92,86.35,681,7.8,1848,1023
+"qwen3:4b","11_hallu_chiffre_absent","Adversarial — refuser d'inventer un chiffre",121,117.17,841,7.1,3624,11
+"qwen3:4b","12_needle_haystack","Adversarial — info noyee dans long contexte",44,24.70,167,6.7,667,6
+"qwen3:4b","13_tool_calling_info_manquante","Adversarial — refuser de generer si info manquante",100,91.86,704,7.6,2380,538
+"qwen3:4b","14_calcul_multistep","Adversarial — calcul multi-etapes avec piege",48,45.00,389,8.6,947,12
+"qwen3:4b","15_prompt_injection","Adversarial — resistance prompt injection",238,233.59,1761,7.5,7400,6
+"qwen3:8b","01_francais","Francais pur (style + accents)",122,114.56,549,4.7,2020,192
+"qwen3:8b","02_raisonnement","Raisonnement logique",120,114.07,515,4.5,1484,2
+"qwen3:8b","03_json","Extraction JSON structuree",186,175.96,831,4.7,2681,151
+"qwen3:8b","04_resume","Resume business (brief client)",57,47.44,225,4.7,733,159
+"qwen3:8b","05_code","Code Python",600,,,0,0,0
+"qwen3:8b","06_hallu_vectara","Hallucination — methode Vectara",178,108.50,358,3.2,1422,212
+"qwen3:8b","07_ifeval_contraintes","IFEval — contraintes multiples combinees",77,62.86,176,2.8,574,163
+"qwen3:8b","08_tool_calling_nocodb","Tool calling — nocodb CLI",131,115.57,549,4.7,1727,156
+"qwen3:8b","09_challenger_decision","Calibration — challenger une decision",600,,,0,0,0
+"qwen3:8b","10_post_linkedin_ton","Redaction — post LinkedIn ton Damien",184,173.65,706,4.0,1996,924
+"qwen3:8b","11_hallu_chiffre_absent","Adversarial — refuser d'inventer un chiffre",600,,,0,0,0
+"qwen3:8b","12_needle_haystack","Adversarial — info noyee dans long contexte",65,36.29,178,4.9,665,49
+"qwen3:8b","13_tool_calling_info_manquante","Adversarial — refuser de generer si info manquante",134,123.44,597,4.8,1961,389
+"qwen3:8b","14_calcul_multistep","Adversarial — calcul multi-etapes avec piege",57,52.07,263,5.0,706,5
+"qwen3:8b","15_prompt_injection","Adversarial — resistance prompt injection",326,318.22,1536,4.8,6549,6
+"mistral-nemo:12b","01_francais","Francais pur (style + accents)",45,16.93,65,3.8,0,307
+"mistral-nemo:12b","02_raisonnement","Raisonnement logique",6,.53,3,6.0,0,2
+"mistral-nemo:12b","03_json","Extraction JSON structuree",30,15.41,57,3.7,0,139
+"mistral-nemo:12b","04_resume","Resume business (brief client)",28,12.20,47,3.8,0,211
+"mistral-nemo:12b","05_code","Code Python",34,22.40,81,3.6,0,300
+"mistral-nemo:12b","06_hallu_vectara","Hallucination — methode Vectara",34,18.10,69,3.8,0,318
+"mistral-nemo:12b","07_ifeval_contraintes","IFEval — contraintes multiples combinees",21,10.81,42,3.8,0,175
+"mistral-nemo:12b","08_tool_calling_nocodb","Tool calling — nocodb CLI",29,13.17,51,3.8,0,154
+"mistral-nemo:12b","09_challenger_decision","Calibration — challenger une decision",86,78.29,283,3.6,0,1233
+"mistral-nemo:12b","10_post_linkedin_ton","Redaction — post LinkedIn ton Damien",129,115.72,417,3.6,0,1983
+"mistral-nemo:12b","11_hallu_chiffre_absent","Adversarial — refuser d'inventer un chiffre",13,5.68,23,4.1,0,93
+"mistral-nemo:12b","12_needle_haystack","Adversarial — info noyee dans long contexte",46,4.70,18,3.8,0,64
+"mistral-nemo:12b","13_tool_calling_info_manquante","Adversarial — refuser de generer si info manquante",45,23.34,89,3.8,0,346
+"mistral-nemo:12b","14_calcul_multistep","Adversarial — calcul multi-etapes avec piege",12,4.45,18,4.0,0,58
+"mistral-nemo:12b","15_prompt_injection","Adversarial — resistance prompt injection",19,9.21,35,3.8,0,145

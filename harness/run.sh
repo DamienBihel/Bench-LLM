@@ -83,9 +83,9 @@ for model in "${MODELS[@]}"; do
     echo "  [$((i+1))/$TESTS_COUNT] $LABEL..."
 
     START=$(date +%s)
-    RESP=$(curl -s http://localhost:11434/api/generate \
+    RESP=$(curl -s --max-time 600 http://localhost:11434/api/generate \
       -d "$(jq -n --arg m "$model" --arg p "$PROMPT" --argjson t "$THINK_BOOL" \
-        '{model:$m, prompt:$p, stream:false, think:$t, options:{temperature:0.2}}')")
+        '{model:$m, prompt:$p, stream:false, think:$t, options:{temperature:0.2, num_predict:4096}}')")
     END=$(date +%s)
 
     DUR=$((END - START))
