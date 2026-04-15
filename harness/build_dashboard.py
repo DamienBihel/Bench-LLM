@@ -63,6 +63,40 @@ def load_models_meta() -> dict:
     return json.loads(MODELS_META.read_text(encoding="utf-8"))
 
 
+def build_synthesis(runs: list[dict]) -> dict | None:
+    """Merge runs with identical test_id fingerprint. For each model, keep its latest run."""
+    if not runs:
+        return None
+    groups: dict[tuple, list[dict]] = {}
+    for r in runs:
+        fp = tuple(sorted({m["test_id"] for m in r["metrics"]}))
+        groups.setdefault(fp, []).append(r)
+    largest = max(groups.values(), key=len)
+    if len(largest) < 2:
+        return None
+    ordered = sorted(largest, key=lambda x: x["name"])
+    model_source = {}
+    for r in ordered:
+        for m in r["metrics"]:
+            model_source[m["model"]] = r["name"]
+    metrics, scores, responses = [], [], []
+    for model, source in model_source.items():
+        r = next(x for x in ordered if x["name"] == source)
+        metrics.extend([m for m in r["metrics"] if m["model"] == model])
+        scores.extend([s for s in r["scores"] if s["model"] == model])
+        responses.extend([x for x in r["responses"] if x["model"] == model])
+    return {
+        "name": "SYNTHESE (tous modeles)",
+        "date": "",
+        "metrics": metrics,
+        "scores": scores,
+        "responses": responses,
+        "is_synthesis": True,
+        "source_runs": [r["name"] for r in ordered],
+        "model_source": model_source,
+    }
+
+
 def build() -> dict:
     prompts = load_prompts()
     label_map = label_to_id(prompts)
@@ -102,10 +136,13 @@ def build() -> dict:
             "metrics": metrics, "scores": scores, "responses": responses,
         })
 
+    synthesis = build_synthesis(runs)
+    all_runs = ([synthesis] if synthesis else []) + runs
+
     return {
         "prompts": prompts,
         "models": models_meta,
-        "runs": runs,
+        "runs": all_runs,
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
 

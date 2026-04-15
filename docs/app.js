@@ -18,10 +18,12 @@ async function load() {
   DATA.runs.forEach((r, i) => {
     const opt = document.createElement("option");
     opt.value = i;
-    opt.textContent = r.name;
+    opt.textContent = r.is_synthesis ? r.name : r.name;
+    if (r.is_synthesis) opt.style.fontWeight = "bold";
     select.appendChild(opt);
   });
-  select.value = DATA.runs.length - 1;
+  const defaultIdx = DATA.runs.findIndex(r => r.is_synthesis);
+  select.value = defaultIdx >= 0 ? defaultIdx : DATA.runs.length - 1;
   select.addEventListener("change", () => loadRun(DATA.runs[select.value]));
 
   document.querySelectorAll(".tab").forEach(btn => {
