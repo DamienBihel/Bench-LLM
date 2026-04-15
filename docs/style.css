@@ -74,6 +74,44 @@ th, td { padding: .4rem .6rem; text-align: left; border-bottom: 1px solid var(--
 th { color: var(--muted); font-weight: 500; }
 td.pass { color: var(--pass); }
 td.fail { color: var(--fail); font-weight: 600; }
+.responses-section { padding: 0 2rem 2rem; }
+.responses-section > h2 {
+  font-size: 1.1rem;
+  margin: 0 0 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+.resp-controls { display: flex; gap: 1.5rem; align-items: flex-start; flex-wrap: wrap; margin-bottom: 1rem; }
+fieldset {
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  padding: .5rem 1rem; display: flex; gap: 1rem; flex-wrap: wrap;
+}
+fieldset legend { color: var(--muted); font-size: .8rem; padding: 0 .25rem; }
+fieldset label { display: flex; gap: .35rem; align-items: center; cursor: pointer; }
+#test-description { margin-bottom: 1rem; }
+#test-description h3 { margin: 0 0 .5rem; font-size: 1rem; color: var(--accent); }
+#test-description .meta { color: var(--muted); font-size: .85rem; margin: 0 0 .75rem; }
+#test-description dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: .35rem 1rem; }
+#test-description dt { color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .03em; }
+#test-description dd { margin: 0; }
+#test-description pre, .response-card pre {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+  padding: .75rem; overflow-x: auto; white-space: pre-wrap; font-size: .85rem; margin: 0;
+}
+#responses-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1rem;
+}
+.response-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1rem 1.25rem; display: flex; flex-direction: column;
+}
+.response-card h3 { margin: 0 0 .25rem; font-size: .95rem; }
+.response-card .stats { color: var(--muted); font-size: .8rem; margin: 0 0 .5rem; }
+.response-card pre { flex: 1; margin-bottom: .5rem; }
+.response-card .scores { font-size: .8rem; }
+.response-card .scores .pass { color: var(--pass); }
+.response-card .scores .fail { color: var(--fail); }
+.response-card .scores ul { margin: .25rem 0 0; padding-left: 1.25rem; }
 footer {
   padding: 1.5rem 2rem 2rem;
   border-top: 1px solid var(--border);

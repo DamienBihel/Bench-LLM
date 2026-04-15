@@ -1,4 +1,71 @@
 {
+  "prompts": [
+    {
+      "id": "01_francais",
+      "label": "Francais pur (style + accents)",
+      "source": "generique",
+      "prompt": "Reecris ce texte en francais direct, sans jargon, 2 phrases max. Garde les accents corrects (e, e, a, c). Texte: 'Dans le cadre de l'optimisation de nos processus internes, nous souhaiterions, si tant est que cela soit possible au regard de votre planning, pouvoir convenir d'une reunion afin d'envisager les modalites potentielles d'une collaboration pouvant s'averer mutuellement benefique.' Reponse uniquement, pas de preambule."
+    },
+    {
+      "id": "02_raisonnement",
+      "label": "Raisonnement logique",
+      "source": "generique",
+      "prompt": "Un pere a 3 fois l'age de son fils. Dans 15 ans, il aura 2 fois son age. Quel est l'age actuel du fils ? Donne uniquement le nombre final, pas de raisonnement."
+    },
+    {
+      "id": "03_json",
+      "label": "Extraction JSON structuree",
+      "source": "generique",
+      "prompt": "Extrait les informations de ce texte au format JSON strict avec ces cles: nom, entreprise, besoin, budget, timeline. Retourne UNIQUEMENT le JSON, sans backticks ni explication. Texte: 'J'ai echange avec Sophie Martin de Ambioz. Elle cherche un CRM pour son equipe de 5 commerciaux, budget autour de 8000 euros, elle veut demarrer en juin.'"
+    },
+    {
+      "id": "04_resume",
+      "label": "Resume business (brief client)",
+      "source": "generique",
+      "prompt": "Resume en 3 bullets maximum ce brief client. Brief: 'Nous sommes un cabinet de coaching qui accompagne 40 dirigeants de PME. Aujourd'hui on jongle entre Excel pour les rendez-vous, Notion pour les notes, et Gmail pour les relances. Les associes perdent 2h par semaine chacun a synchroniser. On voudrait un outil unique, mais surtout pas une usine a gaz qui demande 3 mois de formation. Le tarif est secondaire, ce qu'on veut c'est que ca marche des le premier jour.' Bullets courts, actionnables."
+    },
+    {
+      "id": "05_code",
+      "label": "Code Python",
+      "source": "generique",
+      "prompt": "Ecris une fonction Python 'parse_date(s: str) -> date' qui accepte 'DD/MM/YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD' et leve ValueError sinon. Code uniquement, pas de markdown, pas d'explication."
+    },
+    {
+      "id": "06_hallu_vectara",
+      "label": "Hallucination — methode Vectara",
+      "source": "Vectara Hallucination Leaderboard (2026)",
+      "rubrique": "Compter le nombre d'entites (outils, noms, chiffres) presents dans la reponse mais absents du passage. Cible : 0 entite externe. Toute mention de HubSpot, Calendly, Notion, Zapier, Salesforce, Asana, ClickUp, Trello, Google Workspace, Excel, Gmail (sauf deja cites) = fail.",
+      "prompt": "Resume le texte ci-dessous en 3 bullets maximum. Tu dois utiliser UNIQUEMENT l'information du passage. N'infere rien. N'utilise aucune connaissance externe. Ne mentionne aucun outil qui n'est pas explicitement dans le passage. Passage: 'Nous sommes un cabinet de coaching qui accompagne 40 dirigeants de PME. Aujourd'hui on jongle entre plusieurs outils de bureautique classique. Les associes perdent 2h par semaine chacun a synchroniser. On voudrait un outil unique, mais surtout pas une usine a gaz qui demande 3 mois de formation. Le tarif est secondaire, ce qu'on veut c'est que ca marche des le premier jour.' Reponds directement, pas de preambule."
+    },
+    {
+      "id": "07_ifeval_contraintes",
+      "label": "IFEval — contraintes multiples combinees",
+      "source": "IFEval (Google Research, 2023) + adaptation Damien",
+      "rubrique": "Binaire pour chaque contrainte: (a) <= 80 mots (wc -w), (b) 0 em-dash (grep -c), (c) exactement 3 bullets (commencant par '- ' ou '* '), (d) chaque bullet commence par un verbe a l'infinitif. Score = 4 contraintes respectees ou moins.",
+      "prompt": "Reponds en francais, sans em-dash (—), maximum 80 mots au total, sous forme de 3 bullets exactement, chaque bullet commencant par un verbe a l'infinitif. Sujet: 3 conseils pour un independant qui veut structurer ses relances clients. Reponds directement, pas de preambule."
+    },
+    {
+      "id": "08_tool_calling_nocodb",
+      "label": "Tool calling — nocodb CLI",
+      "source": "BFCL (Berkeley Function Calling Leaderboard) adapte",
+      "rubrique": "Binaire: (a) Commande shell parsable (pas de markdown/backticks), (b) tous champs obligatoires presents (titre, projet, priorite, deadline, energie), (c) projet parmi liste valide (01-Commercial, 07-Reseau, etc.), (d) deadline format YYYY-MM-DD coherent avec 'fin avril 2026'. Score = 4 criteres ou moins.",
+      "prompt": "Genere UNIQUEMENT la commande shell (pas de markdown, pas de backticks, pas d'explication) pour creer cette tache dans NocoDB. Format: nocodb tasks add titre=\"...\" projet=\"...\" priorite=\"...\" deadline=\"YYYY-MM-DD\" energie=\"...\". Projets valides: 01-Commercial, 07-Reseau, 06-Communication. Priorites: 1-basse, 2-moyenne, 3-haute. Energie: light, casual, deep. Contexte: nous sommes le 14 avril 2026. Email du prospect: 'Bonjour Damien, suite a notre cafe, peux-tu me faire un devis pour refaire mon site d'ici fin avril ? Merci, Jean-Pierre Martin.'"
+    },
+    {
+      "id": "09_challenger_decision",
+      "label": "Calibration — challenger une decision",
+      "source": "specifique Damien (calibration CLAUDE.md)",
+      "rubrique": "Binaire: (a) ne commence PAS par 'Excellente', 'Tu as raison', 'Bonne idee', (b) identifie au moins 1 risque concret chiffre ou argumente, (c) propose une alternative concrete, (d) ton direct pas enrobage. Score = 4 criteres ou moins.",
+      "prompt": "Je pense baisser mon TJM de 800 euros a 500 euros pour etre sur de signer ma prospecte Sandra (720 euros au total). Dis-moi si c'est une bonne idee. Sois direct, pas de politesse."
+    },
+    {
+      "id": "10_post_linkedin_ton",
+      "label": "Redaction — post LinkedIn ton Damien",
+      "source": "specifique Damien",
+      "rubrique": "Binaire: (a) 200-350 mots (wc -w), (b) 0 em-dash, (c) pas de 'nous serions', 'decouvrez', 'dans un monde ou', (d) presence d'une opinion tranchee (formule type 'je pense', 'j'en ai marre', 'erreur de dire'), (e) 0 emoji, (f) accents francais corrects (presence de e + e + a). Score = 6 criteres ou moins.",
+      "prompt": "Transforme cette idee en post LinkedIn. Idee: 'Les consultants passent plus de temps a chercher le CRM parfait qu'a vendre.' Contraintes strictes: 200-300 mots, sans em-dash (—), sans formule corporate (pas de 'decouvrez', 'nous serions ravis', 'dans un monde ou'), accents francais corrects, une opinion tranchee, pas d'emoji. Retourne le post directement, pas de preambule."
+    }
+  ],
   "runs": [
     {
       "name": "2026-04-14_baseline",
@@ -140,7 +207,99 @@
           "tokens_per_s": 2.4
         }
       ],
-      "scores": []
+      "scores": [],
+      "responses": [
+        {
+          "model": "gemma4:latest",
+          "test_id": "01_francais",
+          "test_label": "Francais pur (style + accents)",
+          "response": "Pour améliorer nos méthodes de travail, pourrions-nous nous rencontrer quand vous serez disponible ? Nous pourrions ainsi discuter des façons de collaborer qui nous seraient bénéfiques à tous les deux."
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "02_raisonnement",
+          "test_label": "Raisonnement logique",
+          "response": "15"
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "03_json",
+          "test_label": "Extraction JSON structuree",
+          "response": "{\"nom\": \"Sophie Martin\", \"entreprise\": \"Ambioz\", \"besoin\": \"CRM pour une équipe de 5 commerciaux\", \"budget\": \"8000 euros\", \"timeline\": \"Juin\"}"
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "04_resume",
+          "test_label": "Resume business (brief client)",
+          "response": "Voici les 3 bullets qui résument le mieux le besoin :\n\n*   **Unification des outils :** Remplacer l'usage actuel de multiples plateformes (Excel, Notion, Gmail) par une solution unique et centralisée pour gérer les rendez-vous, les notes et les relances.\n*   **Adoption immédiate :** L'outil doit être simple d'utilisation, sans courbe d'apprentissage abrupte, et fonctionnel dès le premier jour.\n*   **Gain de temps critique :** L'objectif principal est de récupérer les 2 heures hebdomadaires perdues par chaque associé dans la synchronisation des données."
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "05_code",
+          "test_label": "Code Python",
+          "response": "from datetime import datetime\n\ndef parse_date(s: str) -> datetime:\n    formats = [\"%d/%m/%Y\", \"%d-%m-%Y\", \"%Y-%m-%d\"]\n    for fmt in formats:\n        try:\n            return datetime.strptime(s, fmt)\n        except ValueError:\n            continue\n    raise ValueError(\"Date format must be DD/MM/YYYY, DD-MM-YYYY, or YYYY-MM-DD\")"
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "01_francais",
+          "test_label": "Francais pur (style + accents)",
+          "response": "Nous aimerions organiser une réunion, si votre planning le permet, pour discuter d’une collaboration potentielle. Cette collaboration pourrait être bénéfique pour les deux parties."
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "02_raisonnement",
+          "test_label": "Raisonnement logique",
+          "response": "15"
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "03_json",
+          "test_label": "Extraction JSON structuree",
+          "response": "{\"nom\":\"Sophie Martin\",\"entreprise\":\"Ambioz\",\"besoin\":\"CRM pour son équipe de 5 commerciaux\",\"budget\":8000,\"timeline\":\"juin\"}"
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "04_resume",
+          "test_label": "Resume business (brief client)",
+          "response": "- **Adoptez HubSpot Free CRM (ou Streak) :** plateforme unique qui intègre Gmail, Google Calendar et notes ; pas de formation longue, prête à l’emploi dès le premier jour.  \n- **Importez vos données Excel et créez des modèles d’e‑mail/automation en < 2 h :** utilisez Zapier si besoin pour synchroniser les derniers champs.  \n- **Organisez un “kick‑off” de 30 min par associé + guide rapide :** mettez en place des rappels hebdomadaires, surveillez l’usage et ajustez rapidement."
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "05_code",
+          "test_label": "Code Python",
+          "response": "from datetime import datetime, date\n\ndef parse_date(s: str) -> date:\n    for fmt in (\"%d/%m/%Y\", \"%d-%m-%Y\", \"%Y-%m-%d\"):\n        try:\n            return datetime.strptime(s, fmt).date()\n        except ValueError:\n            continue\n    raise ValueError(f\"Invalid date format: {s}\")"
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "01_francais",
+          "test_label": "Francais pur (style + accents)",
+          "response": "Pour simplifier nos échanges internes, pourriez-vous me proposer une rencontre pour discuter d’une éventuelle collaboration qui nous profiterait tous deux ?"
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "02_raisonnement",
+          "test_label": "Raisonnement logique",
+          "response": "15"
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "03_json",
+          "test_label": "Extraction JSON structuree",
+          "response": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "04_resume",
+          "test_label": "Resume business (brief client)",
+          "response": "- **Centraliser les rendez-vous, notes et relances** dans un outil unique (ex : *Calendly* + *Notion* intégré ou *HubSpot CRM* simplifié) pour éviter le multitâche Excel/Gmail/Notion.\n- **Prioriser la simplicité** : choisir une solution avec onboarding en <1h (ex : *ClickUp* ou *Trello* pour les tâches + *Zapier* pour automatiser relances).\n- **Tester en 48h max** : démarrer avec un pilote sur 2-3 dirigeants pour valider l’adoption sans formation longue (ex : *Google Workspace* + *Asana* basique)."
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "05_code",
+          "test_label": "Code Python",
+          "response": ""
+        }
+      ]
     },
     {
       "name": "2026-04-14_v2_enrichi",
@@ -775,8 +934,190 @@
           "resultat": "PASS",
           "detail": ""
         }
+      ],
+      "responses": [
+        {
+          "model": "gemma4:latest",
+          "test_id": "01_francais",
+          "test_label": "Francais pur (style + accents)",
+          "response": "Nous aimerions organiser une réunion pour discuter de notre collaboration potentielle. Veuillez nous indiquer vos disponibilités."
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "02_raisonnement",
+          "test_label": "Raisonnement logique",
+          "response": "15"
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "03_json",
+          "test_label": "Extraction JSON structuree",
+          "response": "{\n  \"nom\": \"Sophie Martin\",\n  \"entreprise\": \"Ambioz\",\n  \"besoin\": \"CRM pour 5 commerciaux\",\n  \"budget\": \"8000 euros\",\n  \"timeline\": \"Juin\"\n}"
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "04_resume",
+          "test_label": "Resume business (brief client)",
+          "response": "*   **Centralisation immédiate :** Remplacer le jonglage entre Excel, Notion et Gmail par un outil unique pour gérer les rendez-vous, les notes et les relances.\n*   **Gain de temps critique :** Éliminer la perte de temps de synchronisation (2h/semaine par associé) pour améliorer l'efficacité opérationnelle.\n*   **Adoption garantie :** L'outil doit être ultra-simple d'utilisation, sans courbe d'apprentissage complexe, pour être opérationnel dès le premier jour."
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "05_code",
+          "test_label": "Code Python",
+          "response": "from datetime import datetime\n\ndef parse_date(s: str) -> datetime:\n    formats = [\"%d/%m/%Y\", \"%d-%m-%Y\", \"%Y-%m-%d\"]\n    for fmt in formats:\n        try:\n            return datetime.strptime(s, fmt)\n        except ValueError:\n            continue\n    raise ValueError(\"Date format not recognized\")"
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "06_hallu_vectara",
+          "test_label": "Hallucination — methode Vectara",
+          "response": "* Le cabinet de coaching accompagne 40 dirigeants de PME et utilise actuellement plusieurs outils de bureautique classique.\n* Les associés perdent 2 heures par semaine chacun à cause de la synchronisation de ces outils.\n* Ils souhaitent un outil unique, simple à utiliser dès le premier jour, et le tarif est secondaire."
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "07_ifeval_contraintes",
+          "test_label": "IFEval — contraintes multiples combinees",
+          "response": "* Planifier des points de contact réguliers pour maintenir la visibilité de votre projet et éviter les oublis.\n* Personnaliser chaque relance en ajoutant une information utile ou une ressource pertinente, plutôt que de se concentrer uniquement sur le paiement.\n* Définir un calendrier de relance précis (par exemple, un email doux après 7 jours, puis un appel après 15 jours) pour structurer votre approche."
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "08_tool_calling_nocodb",
+          "test_label": "Tool calling — nocodb CLI",
+          "response": "nocodb tasks add titre=\"Devis site web pour Jean-Pierre Martin\" projet=\"01-Commercial\" priorite=\"3-haute\" deadline=\"2026-04-30\" energie=\"deep\""
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "09_challenger_decision",
+          "test_label": "Calibration — challenger une decision",
+          "response": "**Non. C'est une mauvaise idée.**\n\nTu ne dois pas baisser ton TJM de 800 € à 500 € juste pour signer un client. C'est une décote de 37,5 % qui envoie un signal de dévaluation massif.\n\nVoici pourquoi c'est risqué et ce que tu dois faire à la place.\n\n---\n\n### ⚠️ Le danger immédiat\n\n1.  **Tu fixes un précédent :** Sandra va penser que ton prix réel est de 500 €. Quand tu auras le prochain client, il va négocier à 500 € et tu seras piégé.\n2.  **Tu dévalorises ton expertise :** Un taux de 800 € est ton prix de marché. Le baisser de manière aussi brutale te fait passer du statut d'expert coûteux à celui de prestataire en promotion.\n3.  **Tu négocies sur la peur :** Tu ne dois jamais négocier ton prix en fonction de ta peur de perdre le client.\n\n### ✅ Ce que tu dois faire à la place (Stratégie)\n\nNe baisse pas ton taux. Baisse le **champ d'application** ou les **conditions**.\n\nTon objectif n'est pas de faire baisser ton prix, mais de rendre l'offre irrésistible.\n\n**Option 1 : Le TJM reste à 800 €, mais tu réduis le périmètre (Le meilleur choix)**\n*   **Argument :** \"Pour cette première phase de lancement avec Sandra, je suis prêt à réduire le nombre de jours/heures de X à Y, ce qui représente une économie globale pour vous, tout en maintenant la qualité de mon intervention.\"\n*   **Résultat :** Tu gardes ton taux élevé (800 €) et tu réduis le coût total, ce qui est perçu comme un avantage stratégique, pas comme une remise sur ta valeur.\n\n**Option 2 : Le TJM reste à 800 €, mais tu ajoutes une valeur non monétaire**\n*   **Argument :** \"Pour vous aider à démarrer, je vous offre un audit de 3 heures en complément de la mission, sans frais supplémentaires.\"\n*   **Résultat :** Tu donnes un bonus de service qui coûte moins cher à ton temps mais qui a une valeur perçue très élevée.\n\n**Option 3 : Le TJM reste à 800 €, mais tu paies en bloc (Si le projet est grand)**\n*   **Argument :** \"Si vous vous engagez sur un minimum de 3 mois, je peux vous accorder un rabais de X% sur le total, car cela me permet de planifier ma charge de travail.\"\n*   **Résultat :** Tu es récompensé pour la stabilité du contrat, et non pour la difficulté de la négociation.\n\n### 🎯 Conclusion\n\nNe te déprécie pas. Ton prix est ce que tu vaux. Si Sandra ne peut pas payer 800 €, c'est qu'elle n'est pas le bon client pour ton niveau de prix.\n\n**Reste à 800 € et négocie le périmètre.**"
+        },
+        {
+          "model": "gemma4:latest",
+          "test_id": "10_post_linkedin_ton",
+          "test_label": "Redaction — post LinkedIn ton Damien",
+          "response": "Le temps que passent les consultants à chercher le « CRM parfait » est un temps précieux, et souvent, ce temps est gaspillé.\n\nIl est temps d’admettre une vérité inconfortable : beaucoup de cabinets se sont transformés en architectes de logiciels plutôt qu’en conseillers stratégiques. Le cycle de vente est devenu un parcours de fonctionnalités. On ne vend plus une solution à un problème métier ; on vend la complexité d’un outil.\n\nCette obsession pour la plateforme idéale détourne l'attention de ce qui compte vraiment : le client.\n\nUn bon consultant ne doit pas être un expert en intégration de bases de données. Il doit être un expert en processus humains. Son rôle n'est pas de faire rêver avec des tableaux de bord futuristes, mais d'aider l'entreprise à comprendre où elle perd de l'argent, où elle ralentit, et comment elle pourrait mieux organiser ses équipes.\n\nLe CRM n'est qu'un miroir. Il ne résout rien par magie. Il ne fait qu'enregistrer ce qui existe déjà. Si le processus de vente est chaotique, le meilleur des CRMs ne fera que rendre ce chaos beau et organisé.\n\nArrêtons de confondre outil et stratégie.\n\nLa vraie valeur ne réside pas dans la capacité à connecter mille points de données, mais dans la capacité à faire prendre une décision éclairée avec les données disponibles. Le consultant doit ramener la conversation au cœur du métier du client. Il doit parler de marge, de rétention, de temps passé sur le terrain.\n\nSi votre pitch commence par une démonstration de flux de travail automatisé, vous avez échoué. Commencez par la douleur. C'est là que se trouve le vrai marché."
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "01_francais",
+          "test_label": "Francais pur (style + accents)",
+          "response": "Nous aimerions organiser une réunion, si votre planning le permet, pour discuter d'une collaboration bénéfique pour les deux parties. Cela nous permettrait d'optimiser nos processus internes."
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "02_raisonnement",
+          "test_label": "Raisonnement logique",
+          "response": "15"
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "03_json",
+          "test_label": "Extraction JSON structuree",
+          "response": "{\"nom\":\"Sophie Martin\",\"entreprise\":\"Ambioz\",\"besoin\":\"CRM pour son équipe de 5 commerciaux\",\"budget\":\"8000 euros\",\"timeline\":\"juin\"}"
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "04_resume",
+          "test_label": "Resume business (brief client)",
+          "response": "- **Choisir un outil tout‑en‑un** : testez un CRM léger (HubSpot, Zoho, ou Monday.com) qui intègre agenda, notes et e‑mail en un seul tableau de bord.  \n- **Piloter rapidement** : déployez l’outil auprès de 5 associés pendant 2 semaines, avec une session de formation de 30 min et des tutoriels vidéo.  \n- **Mesurer l’impact** : comparez le temps de synchronisation avant/après (objectif ≤ 30 min/sem). Ajustez les automatisations (rappels, modèles d’e‑mail) pour atteindre la productivité dès le premier jour."
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "05_code",
+          "test_label": "Code Python",
+          "response": "from datetime import datetime, date\n\ndef parse_date(s: str) -> date:\n    for fmt in (\"%d/%m/%Y\", \"%d-%m-%Y\", \"%Y-%m-%d\"):\n        try:\n            return datetime.strptime(s, fmt).date()\n        except ValueError:\n            continue\n    raise ValueError(f\"Invalid date format: {s}\")"
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "06_hallu_vectara",
+          "test_label": "Hallucination — methode Vectara",
+          "response": "- Cabinet de coaching accompagne 40 dirigeants de PME.  \n- Utilise plusieurs outils de bureautique classiques, les associés perdent 2 h par semaine à synchroniser.  \n- Souhaite un outil unique, sans usine à gaz, fonctionnant dès le premier jour, le tarif étant secondaire."
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "07_ifeval_contraintes",
+          "test_label": "IFEval — contraintes multiples combinees",
+          "response": "- Planifier un calendrier de relance, en définissant des intervalles adaptés à chaque type de client.  \n- Personnaliser chaque message, en rappelant les points clés de la première interaction et en proposant une valeur ajoutée.  \n- Suivre les réponses avec un tableau de suivi, afin d’ajuster la fréquence et le contenu des relances."
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "08_tool_calling_nocodb",
+          "test_label": "Tool calling — nocodb CLI",
+          "response": "nocodb tasks add titre=\"Devis site web - Jean-Pierre Martin\" projet=\"01-Commercial\" priorite=\"3-haute\" deadline=\"2026-04-30\" energie=\"casual\""
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "09_challenger_decision",
+          "test_label": "Calibration — challenger une decision",
+          "response": "Non. Vous perdez de l’argent. 500 € h ne couvre pas vos frais, votre valeur et vous donne un signal de dépréciation. Baisser à 500 € pour un projet de 720 € vous fait perdre 300 € h. Négociez un tarif plus raisonnable ou refusez. Si le client ne peut pas payer plus, proposez un forfait qui couvre vos coûts ou réduisez le scope. Baisser à 500 € n’est pas une bonne idée."
+        },
+        {
+          "model": "gpt-oss:20b",
+          "test_id": "10_post_linkedin_ton",
+          "test_label": "Redaction — post LinkedIn ton Damien",
+          "response": "Les consultants passent plus de temps à chercher le CRM parfait qu’à vendre. C’est une réalité qui me frustre depuis plusieurs années. Chaque réunion commence par une analyse de fonctionnalités, une comparaison de prix, une démonstration de tableaux de bord. Le résultat ? Un client qui attend, un prospect qui se désintéresse, et un consultant qui se retrouve à jongler entre les présentations et les fiches techniques.\n\nPourquoi cette obsession ? Parce que le CRM est devenu le symbole de la transformation digitale. Il promet de centraliser les données, d’automatiser les tâches et de booster les ventes. Mais il ne suffit pas d’avoir un outil moderne. Il faut l’adapter à la culture de l’entreprise, former les équipes, mesurer les indicateurs pertinents. Sans ces éléments, le CRM reste un gadget coûteux.\n\nIl est temps de repenser notre approche. Au lieu de chercher le système idéal, concentrons‑nous sur la valeur ajoutée pour le client. Proposons des solutions simples, testons rapidement, itérons. Le vrai avantage d’un consultant réside dans sa capacité à transformer les besoins en résultats concrets, pas dans la démonstration d’une interface.\n\nSi vous êtes consultant, arrêtez de courir après le CRM parfait. Offrez plutôt un accompagnement pragmatique, basé sur l’impact réel. C’est ainsi que vous gagnerez la confiance de vos clients et la vôtre."
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "01_francais",
+          "test_label": "Francais pur (style + accents)",
+          "response": "Pour simplifier nos méthodes de travail, pourriez-vous nous proposer une rencontre pour discuter d’une éventuelle collaboration avantageuse pour les deux parties, selon votre emploi du temps ?"
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "02_raisonnement",
+          "test_label": "Raisonnement logique",
+          "response": "10"
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "03_json",
+          "test_label": "Extraction JSON structuree",
+          "response": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "04_resume",
+          "test_label": "Resume business (brief client)",
+          "response": "- **Centraliser les données** : Remplacer Excel (plannings), Notion (notes) et Gmail (relances) par **un outil unique et intuitif** (ex : CRM simple comme HubSpot ou Notion + intégrations natives, ou un outil dédié comme **Pipedrive** ou **ClickUp** avec templates prêts à l’emploi).\n\n- **Automatiser les tâches chronophages** : Configurer des **rappels automatiques** (relances clients, rendez-vous) et des **modèles de notes** pré-remplis pour gagner 2h/semaine/associé dès le 1er jour (ex : flux Gmail + Notion via Zapier ou outils \"no-code\" comme **Make**).\n\n- **Former en 1h max** : Choisir un outil avec **interface visuelle** (drag & drop) et **support réactif** (chatbot ou hotline dédiée), en évitant les formations longues (ex : outils avec tutoriels vidéo <5 min ou démonstration en live par le fournisseur)."
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "05_code",
+          "test_label": "Code Python",
+          "response": ""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "06_hallu_vectara",
+          "test_label": "Hallucination — methode Vectara",
+          "response": "- Un cabinet de coaching accompagne **40 dirigeants de PME** et utilise actuellement **plusieurs outils de bureautique classiques**, ce qui génère des **pertes de temps** (2h/semaine par associé) pour les synchroniser.\n\n- Les associés recherchent **un outil unique**, **simple à prendre en main** (sans formation longue ni \"usine à gaz\"), fonctionnel **immédiatement dès le premier jour**.\n\n- Le **prix n’est pas le critère prioritaire** : l’efficacité et la facilité d’utilisation sont les principaux enjeux."
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "07_ifeval_contraintes",
+          "test_label": "IFEval — contraintes multiples combinees",
+          "response": "- **Personnaliser** chaque relance avec le nom du client et un rappel de leur besoin précis.\n- **Espacer** les relances (ex : 1 semaine, 2 semaines, 1 mois) pour éviter la pression.\n- **Proposer** une solution concrète (ex : délai, modalités) dans chaque message pour faciliter la réponse."
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "08_tool_calling_nocodb",
+          "test_label": "Tool calling — nocodb CLI",
+          "response": "nocodb tasks add titre=\"Devis pour refonte du site web - Jean-Pierre Martin\" projet=\"01-Commercial\" priorite=\"3\" deadline=\"2026-04-30\" energie=\"deep\""
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "09_challenger_decision",
+          "test_label": "Calibration — challenger une decision",
+          "response": "Voici les points clés à analyser **sans filtre** pour prendre ta décision :\n\n1. **Marge brute** :\n   - Si tu passes de **800€ à 500€ TJM**, tu perds **37,5%** de ton tarif.\n   - Pour Sandra (720€ de facturation totale), cela signifie :\n     - **À 800€ TJM** : ~9h de travail (720/800).\n     - **À 500€ TJM** : ~14,4h de travail (720/500).\n   → **Tu doubles presque le temps facturable** pour le même budget client. **Risque de burn-out ou de perte de rentabilité si le scope explose.**\n\n2. **Signal envoyé** :\n   - Baisser ton TJM **uniquement pour un client** envoie un message :\n     - *\"Je suis désespéré(e).\"*\n     - *\"Je ne crois pas en ma valeur.\"*\n     - *\"Je suis prêt(e) à me dévaloriser pour un deal.\"*\n   → **Sandra pourrait interpréter cela comme une faiblesse** et te demander plus de concessions (délais, scope, etc.).\n\n3. **Alternatives plus intelligentes** :\n   - **Négocier un TJM fixe + bonus** (ex : 650€ TJM + 10% si livré sous X jours).\n   - **Proposer un forfait global** (ex : 720€ pour Y livrables précis, avec pénalités en cas de dépassement).\n   - **Exiger un engagement écrit** sur le scope et les délais pour éviter les malentendus.\n   - **Utiliser le TJM comme levier** : *\"Mon TJM standard est de 800€, mais pour ce projet spécifique, je peux faire 600€ TJM si nous fixons clairement les livrables et les délais dans un contrat.\"*\n\n4. **Risque de perte de crédibilité** :\n   - Si tu baisses ton TJM **sans contrepartie claire**, tu risques :\n     - Que Sandra te demande **encore moins cher** la prochaine fois.\n     - Que d’autres prospects **te sous-estiment** (effet \"precedent\").\n     - Que ton réseau **doute de ta valeur** (bouche-à-oreille).\n\n5. **Question clé à te poser** :\n   - *\"Est-ce que je signe Sandra à 500€ TJM parce que j’en ai besoin, ou parce que je crois vraiment que mon travail vaut moins cher ?\"*\n   → Si c’est par **besoin urgent**, c’est un mauvais signe. Si c’est par **stratégie** (ex : tu as trop de travail et veux tester un TJM plus bas), alors oui, mais avec des garde-fous.\n\n---\n**Verdict brut** :\n- **Non, ce n’est pas une bonne idée** si tu veux garder ta crédibilité et ta rentabilité.\n- **Oui, mais sous conditions** si tu négocies un **forfait global avec livrables fixes** + pénalités en cas de dépassement, et que tu justifies la baisse par un **gain de temps ou une simplification du scope**.\n\n**Action recommandée** :\n1. Propose un **forfait de 720€ pour X livrables précis** (avec une liste détaillée).\n2. Ajoute une clause : *\"En cas de dépassement de scope non prévu, le TJM revient à 800€.\"*\n3. Si Sandra refuse, demande **au moins un engagement écrit** sur les livrables et les délais.\n\nSi elle insiste pour un TJM bas **sans contrepartie**, **ne signe pas** : tu perdras plus que tu ne gagneras."
+        },
+        {
+          "model": "ministral-3:8b",
+          "test_id": "10_post_linkedin_ton",
+          "test_label": "Redaction — post LinkedIn ton Damien",
+          "response": "**Le CRM parfait n’existe pas. Et si vous arrêtiez de le chercher ?**\n\nLes consultants en transformation digitale passent des mois à comparer Salesforce, HubSpot, Microsoft Dynamics ou les solutions open source, à former leurs équipes, à migrer des données, à former les utilisateurs. Résultat : le projet prend du retard, le budget explose, et personne ne vend plus. Pourtant, le vrai problème n’est pas le CRM. C’est l’illusion que la technologie seule va résoudre vos problèmes commerciaux.\n\nUn CRM est un outil, pas une stratégie. Beaucoup d’entreprises achètent un logiciel onéreux, le déploiement prend des mois, et quand il est enfin opérationnel, les équipes ne l’utilisent pas correctement parce qu’elles n’ont pas clarifié en amont : *qui vend quoi, à qui, et comment on mesure le succès ?* Sans cette base, même le CRM le plus sophistiqué devient un simple registre électronique.\n\nLa vraie question n’est pas « quel CRM choisir ? » mais « comment organiser nos processus pour vendre plus, sans dépendre d’un outil parfait ? ». Commencez par former vos équipes à vendre, pas à configurer un logiciel. Optimisez vos pipelines avant d’investir dans une nouvelle interface. Et si le CRM actuel ne sert à rien, changez les gens, pas la technologie.\n\nLes entreprises qui réussissent ne cherchent pas le CRM idéal. Elles se concentrent sur ce qui fait vendre : des équipes motivées, des processus clairs, et une obsession pour le résultat. Le reste, c’est du bruit."
+        }
       ]
     }
   ],
-  "generated_at": "2026-04-15T07:22:32+00:00"
+  "generated_at": "2026-04-15T07:34:55+00:00"
 }

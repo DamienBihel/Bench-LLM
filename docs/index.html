@@ -43,6 +43,22 @@
     </div>
   </section>
 
+  <section class="responses-section">
+    <h2>Réponses brutes par test</h2>
+
+    <div class="resp-controls">
+      <label>Test :
+        <select id="test-select"></select>
+      </label>
+      <fieldset id="model-checkboxes">
+        <legend>Modèles à comparer :</legend>
+      </fieldset>
+    </div>
+
+    <article id="test-description" class="card full"></article>
+    <div id="responses-grid"></div>
+  </section>
+
   <footer>
     <p>Source : <code>runs/YYYY-MM-DD_tag/_metrics.csv</code> + <code>_scores.csv</code> — généré par <code>harness/build_dashboard.py</code>.</p>
   </footer>

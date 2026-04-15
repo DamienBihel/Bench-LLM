@@ -22,12 +22,112 @@ async function load() {
   render(DATA.runs[select.value]);
 }
 
+let CURRENT_RUN = null;
+let SELECTED_MODELS = new Set();
+let CURRENT_TEST = null;
+
 function render(run) {
+  CURRENT_RUN = run;
   renderKPIs(run);
   renderSpeedChart(run);
   renderDurationChart(run);
   renderScoresChart(run);
   renderScoresTable(run);
+  renderResponsesSection(run);
+}
+
+function renderResponsesSection(run) {
+  const models = uniqueModels(run);
+  SELECTED_MODELS = new Set(models);
+
+  const cb = document.getElementById("model-checkboxes");
+  cb.innerHTML = "<legend>Modèles à comparer :</legend>";
+  models.forEach(m => {
+    const id = "cb-" + m.replace(/[^a-z0-9]/gi, "_");
+    const label = document.createElement("label");
+    label.innerHTML = `<input type="checkbox" id="${id}" value="${m}" checked> ${m}`;
+    label.querySelector("input").addEventListener("change", e => {
+      if (e.target.checked) SELECTED_MODELS.add(m); else SELECTED_MODELS.delete(m);
+      renderResponses();
+    });
+    cb.appendChild(label);
+  });
+
+  const tests = uniqueTests(run);
+  const sel = document.getElementById("test-select");
+  sel.innerHTML = "";
+  tests.forEach(([id, label]) => {
+    const opt = document.createElement("option");
+    opt.value = id;
+    opt.textContent = id + " — " + label;
+    sel.appendChild(opt);
+  });
+  CURRENT_TEST = tests[0]?.[0] || null;
+  sel.value = CURRENT_TEST;
+  sel.onchange = () => { CURRENT_TEST = sel.value; renderResponses(); };
+
+  renderResponses();
+}
+
+function renderResponses() {
+  if (!CURRENT_RUN || !CURRENT_TEST) return;
+  const test_id = CURRENT_TEST;
+  const prompt = (DATA.prompts || []).find(p => p.id === test_id);
+
+  const desc = document.getElementById("test-description");
+  if (prompt) {
+    desc.innerHTML = `
+      <h3>${prompt.id} — ${prompt.label}</h3>
+      <p class="meta"><strong>Source :</strong> ${prompt.source || "n/a"}</p>
+      <dl>
+        <dt>Prompt envoyé</dt><dd><pre>${escapeHtml(prompt.prompt)}</pre></dd>
+        ${prompt.rubrique ? `<dt>Méthode d'évaluation</dt><dd><pre>${escapeHtml(prompt.rubrique)}</pre></dd>` : ""}
+      </dl>
+    `;
+  } else {
+    desc.innerHTML = `<p class="meta">Pas de descriptif disponible pour ce test.</p>`;
+  }
+
+  const grid = document.getElementById("responses-grid");
+  grid.innerHTML = "";
+  const models = uniqueModels(CURRENT_RUN).filter(m => SELECTED_MODELS.has(m));
+  if (!models.length) {
+    grid.innerHTML = `<p style="color:var(--muted)">Sélectionne au moins un modèle.</p>`;
+    return;
+  }
+
+  models.forEach(model => {
+    const resp = (CURRENT_RUN.responses || []).find(r => r.model === model && r.test_id === test_id);
+    const metric = CURRENT_RUN.metrics.find(m => m.model === model && m.test_id === test_id);
+    const scores = (CURRENT_RUN.scores || []).filter(s => s.model === model && (s.test_id === test_id || test_id.startsWith(s.test_id) || s.test_id.startsWith(test_id.split("_")[0])));
+
+    const card = document.createElement("div");
+    card.className = "response-card";
+
+    let stats = "";
+    if (metric) {
+      stats = `durée ${metric.duree_s}s · ${metric.eval_count} tokens · ${metric.tokens_per_s} t/s`;
+    }
+
+    let scoresHtml = "";
+    if (scores.length) {
+      scoresHtml = `<div class="scores"><strong>Critères :</strong><ul>` +
+        scores.map(s => `<li class="${s.resultat === 'PASS' ? 'pass' : 'fail'}">${s.critere} : ${s.resultat}${s.detail ? ' (' + s.detail + ')' : ''}</li>`).join("") +
+        `</ul></div>`;
+    }
+
+    card.innerHTML = `
+      <header><h3>${model}</h3><p class="stats">${stats}</p></header>
+      <pre>${resp ? escapeHtml(resp.response) : "<i>Pas de réponse</i>"}</pre>
+      ${scoresHtml}
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function escapeHtml(s) {
+  if (s == null) return "";
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
 
 function uniqueModels(run) {
