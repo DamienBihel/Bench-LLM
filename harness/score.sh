@@ -27,8 +27,8 @@ echo "model,test_id,critere,resultat,detail" > "$SCORES_CSV"
 extract_response() {
   local file="$1"
   local label="$2"
-  awk -v lbl="$label" '
-    $0 ~ "^## " lbl { inside = 1; capture = 0; next }
+  awk -v lbl="## $label" '
+    $0 == lbl { inside = 1; capture = 0; next }
     inside && /^```$/ {
       if (capture == 0) { capture = 1 } else { capture = 0; inside = 0 }
       next

@@ -70,7 +70,10 @@ def build() -> dict:
         metrics = read_csv(run_dir / "_metrics.csv")
         scores = read_csv(run_dir / "_scores.csv")
         for m in metrics:
-            for k in ("duree_s", "eval_duration_s", "eval_count", "tokens_per_s"):
+            for k in ("duree_s", "eval_duration_s", "eval_count", "tokens_per_s", "thinking_chars", "response_chars"):
+                if k not in m:
+                    m[k] = None
+                    continue
                 try:
                     m[k] = float(m[k]) if m.get(k) not in (None, "") else None
                 except ValueError:

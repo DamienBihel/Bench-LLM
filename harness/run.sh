@@ -31,7 +31,7 @@ echo ""
 
 TESTS_COUNT=$(jq '.tests | length' "$PROMPTS_FILE")
 OVERALL_CSV="$RUN_DIR/_metrics.csv"
-echo "model,test_id,test_label,duree_s,eval_duration_s,eval_count,tokens_per_s" > "$OVERALL_CSV"
+echo "model,test_id,test_label,duree_s,eval_duration_s,eval_count,tokens_per_s,thinking_chars,response_chars" > "$OVERALL_CSV"
 
 for model in "${MODELS[@]}"; do
   MODEL_SAFE=$(echo "$model" | tr ':/' '__')
@@ -61,11 +61,14 @@ for model in "${MODELS[@]}"; do
     START=$(date +%s)
     RESP=$(curl -s http://localhost:11434/api/generate \
       -d "$(jq -n --arg m "$model" --arg p "$PROMPT" \
-        '{model:$m, prompt:$p, stream:false, options:{temperature:0.2}}')")
+        '{model:$m, prompt:$p, stream:false, think:true, options:{temperature:0.2}}')")
     END=$(date +%s)
 
     DUR=$((END - START))
-    OUTPUT=$(echo "$RESP" | jq -r '.response')
+    OUTPUT=$(echo "$RESP" | jq -r '.response // ""')
+    THINKING=$(echo "$RESP" | jq -r '.thinking // ""')
+    THINKING_CHARS=${#THINKING}
+    RESPONSE_CHARS=${#OUTPUT}
     EVAL_COUNT=$(echo "$RESP" | jq -r '.eval_count // 0')
     EVAL_DUR_NS=$(echo "$RESP" | jq -r '.eval_duration // 0')
     EVAL_DUR_S=$(echo "scale=2; $EVAL_DUR_NS / 1000000000" | bc)
@@ -75,16 +78,24 @@ for model in "${MODELS[@]}"; do
       TOKS="0"
     fi
 
-    echo "       duree=${DUR}s  eval=${EVAL_DUR_S}s  tokens=${EVAL_COUNT}  tps=${TOKS}t/s"
+    echo "       duree=${DUR}s  eval=${EVAL_DUR_S}s  tokens=${EVAL_COUNT}  tps=${TOKS}t/s  thinking=${THINKING_CHARS}c  reponse=${RESPONSE_CHARS}c"
 
     # Log markdown
     {
       echo "## $LABEL"
       echo ""
       echo "- **Source** : $SOURCE"
-      echo "- **Stats** : duree=${DUR}s | eval=${EVAL_DUR_S}s | tokens=${EVAL_COUNT} | vitesse=${TOKS} t/s"
+      echo "- **Stats** : duree=${DUR}s | eval=${EVAL_DUR_S}s | tokens=${EVAL_COUNT} (total) | vitesse=${TOKS} t/s | thinking=${THINKING_CHARS}c | reponse=${RESPONSE_CHARS}c"
       echo "- **Rubrique** : $RUBRIQUE"
       echo ""
+      if [ "$THINKING_CHARS" -gt 0 ]; then
+        echo "**Thinking :**"
+        echo ""
+        echo '```'
+        echo "$THINKING"
+        echo '```'
+        echo ""
+      fi
       echo "**Reponse :**"
       echo ""
       echo '```'
@@ -96,7 +107,7 @@ for model in "${MODELS[@]}"; do
     } >> "$OUT_FILE"
 
     # Log CSV
-    echo "\"$model\",\"$ID\",\"$LABEL\",$DUR,$EVAL_DUR_S,$EVAL_COUNT,$TOKS" >> "$OVERALL_CSV"
+    echo "\"$model\",\"$ID\",\"$LABEL\",$DUR,$EVAL_DUR_S,$EVAL_COUNT,$TOKS,$THINKING_CHARS,$RESPONSE_CHARS" >> "$OVERALL_CSV"
   done
 
   echo ""

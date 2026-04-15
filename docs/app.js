@@ -303,9 +303,26 @@ function renderResponses() {
     const card = document.createElement("div");
     card.className = "response-card";
 
-    const stats = metric
-      ? `durée ${metric.duree_s}s · ${metric.eval_count} tokens · ${metric.tokens_per_s} t/s`
-      : "stats indisponibles";
+    let stats = "stats indisponibles";
+    if (metric) {
+      const parts = [
+        `durée ${metric.duree_s}s`,
+        `${metric.eval_count} tokens total`,
+        `${metric.tokens_per_s} t/s`,
+      ];
+      if (metric.thinking_chars != null) {
+        const tc = metric.thinking_chars;
+        const rc = metric.response_chars || 0;
+        const total = tc + rc;
+        if (tc > 0) {
+          const pct = total > 0 ? Math.round((tc / total) * 100) : 0;
+          parts.push(`réflexion ${tc}c (${pct}%)`);
+        } else {
+          parts.push("0 réflexion");
+        }
+      }
+      stats = parts.join(" · ");
+    }
 
     let scoresHtml = "";
     if (scores.length) {
