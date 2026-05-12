@@ -121,7 +121,79 @@ function renderAll() {
   renderDurationChart();
   renderScoresChart();
   renderScoresByTest();
+  renderTestsCatalog();
   renderResponses();
+}
+
+function renderTestsCatalog() {
+  const container = document.getElementById("tests-catalog");
+  if (!container) return;
+  container.innerHTML = "";
+  const prompts = DATA.prompts || [];
+
+  const bySource = {};
+  prompts.forEach(p => {
+    const src = p.source || "autre";
+    (bySource[src] = bySource[src] || []).push(p);
+  });
+
+  // Ordre : generique d'abord, puis adversarial, puis specifique Damien, puis le reste
+  const sourceOrder = [
+    "generique",
+    "Vectara Hallucination Leaderboard (2026)",
+    "IFEval (Google Research, 2023) + adaptation Damien",
+    "BFCL (Berkeley Function Calling Leaderboard) adapte",
+    "specifique Damien (calibration CLAUDE.md)",
+    "specifique Damien",
+    "adversarial (test piege)",
+    "adversarial (needle in haystack light)",
+    "adversarial (calibration tool calling)",
+    "adversarial (raisonnement chiffre)",
+    "adversarial (securite)",
+  ];
+
+  const allSources = sourceOrder.concat(Object.keys(bySource).filter(s => !sourceOrder.includes(s)));
+  allSources.forEach(src => {
+    const tests = bySource[src];
+    if (!tests || !tests.length) return;
+    const block = document.createElement("div");
+    block.className = "test-block";
+    block.style.marginBottom = "1.5rem";
+    let html = `<h3 style="color:var(--accent); font-size:1rem; margin-bottom:1rem;">${escapeHtml(src)} (${tests.length} test${tests.length > 1 ? "s" : ""})</h3>`;
+
+    tests.forEach(t => {
+      const promptText = t.prompt || "";
+      const criteria = t.criteria || [];
+      html += `<details style="margin-bottom:.75rem; background:var(--card); border:1px solid var(--border); border-radius:6px; padding:.75rem 1rem;">`;
+      html += `<summary style="cursor:pointer; font-weight:600; color:var(--fg);">${escapeHtml(t.id)} — ${escapeHtml(t.label)} <span class="model-size">(${criteria.length} critères)</span></summary>`;
+      html += `<div style="margin-top:.75rem;">`;
+      if (t.description) {
+        html += `<p style="margin:.5rem 0;"><strong>Objectif :</strong> ${escapeHtml(t.description)}</p>`;
+      }
+      html += `<div style="margin:.75rem 0;"><strong>Prompt envoyé :</strong>`;
+      html += `<pre style="margin-top:.35rem; white-space:pre-wrap; word-wrap:break-word; max-width:100%;">${escapeHtml(promptText)}</pre></div>`;
+      if (criteria.length) {
+        html += `<div style="margin-top:.75rem;"><strong>Critères de scoring (${criteria.length}) :</strong>`;
+        html += `<table class="criteria-table" style="margin-top:.35rem;"><thead><tr>`;
+        html += `<th style="width:25%;">Id</th><th>Description (condition PASS)</th>`;
+        html += `</tr></thead><tbody>`;
+        criteria.forEach(c => {
+          html += `<tr>`;
+          html += `<td><code>${escapeHtml(c.id)}</code></td>`;
+          html += `<td>${escapeHtml(c.desc || "")}</td>`;
+          html += `</tr>`;
+        });
+        html += `</tbody></table></div>`;
+      }
+      html += `</div></details>`;
+    });
+    block.innerHTML = html;
+    container.appendChild(block);
+  });
+
+  if (!prompts.length) {
+    container.innerHTML = `<p class="hint">Pas de prompts chargés.</p>`;
+  }
 }
 
 /* ---------- helpers ---------- */
@@ -279,6 +351,10 @@ function renderScoresByTest() {
   const models = activeModels();
   const tests = uniqueTests(CURRENT_RUN);
 
+  // Map rapide : test_id -> prompt (pour description + criteria desc)
+  const promptById = {};
+  (DATA.prompts || []).forEach(p => { promptById[p.id] = p; });
+
   tests.forEach(([test_id, test_label]) => {
     const testScores = models.flatMap(m => scoresForTest(m, test_id));
     if (!testScores.length) return;
@@ -290,13 +366,27 @@ function renderScoresByTest() {
     const totalPossible = criteria.length * models.length;
     const passCount = testScores.filter(s => s.resultat === "PASS").length;
 
+    const prompt = promptById[test_id] || {};
+    const description = prompt.description || "";
+    const critDescById = {};
+    (prompt.criteria || []).forEach(c => { critDescById[c.id] = c.desc; });
+
     let html = `<h3>${test_id} — ${test_label}</h3>`;
+    if (description) {
+      html += `<p class="test-description-inline">${escapeHtml(description)}</p>`;
+    }
     html += `<p class="summary">${passCount}/${totalPossible} critères PASS sur ${models.length} modèle(s)</p>`;
-    html += `<table class="criteria-table"><thead><tr><th>Critère</th>`;
+    html += `<table class="criteria-table"><thead><tr><th style="width:32%">Critère</th>`;
     models.forEach(m => html += `<th>${m}</th>`);
     html += `</tr></thead><tbody>`;
     criteria.forEach(c => {
-      html += `<tr><td>${c}</td>`;
+      const critDesc = critDescById[c] || "";
+      html += `<tr><td>`;
+      html += `<code class="crit-id">${escapeHtml(c)}</code>`;
+      if (critDesc) {
+        html += `<div class="crit-desc">${escapeHtml(critDesc)}</div>`;
+      }
+      html += `</td>`;
       models.forEach(m => {
         const row = scoresForTest(m, test_id).find(s => s.critere === c);
         if (!row) { html += "<td><span class='badge'>—</span></td>"; return; }

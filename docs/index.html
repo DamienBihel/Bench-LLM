@@ -13,7 +13,7 @@
       <p class="sub">Comparatif Ollama — MacBook Pro 16 Go RAM</p>
     </div>
     <p class="meta">
-      <button id="theme-toggle" class="theme-toggle" aria-label="Basculer theme clair/sombre" title="Basculer le theme">🌓</button>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Basculer thème clair/sombre" title="Basculer le thème">🌓</button>
       <a href="https://github.com/DamienBihel/Bench-LLM">Repo GitHub</a> ·
       <span id="generated"></span>
     </p>
@@ -33,6 +33,7 @@
   <nav class="tabs" role="tablist">
     <button class="tab active" data-tab="perf" role="tab">Performance</button>
     <button class="tab" data-tab="quality" role="tab">Qualité</button>
+    <button class="tab" data-tab="tests" role="tab">Tests & Critères</button>
     <button class="tab" data-tab="raw" role="tab">Réponses brutes</button>
   </nav>
 
@@ -59,6 +60,16 @@
         <h2>Détail critères par test</h2>
         <p class="hint">Vert = PASS, rouge = FAIL. Détail entre parenthèses si fourni par le scoring.</p>
         <div id="scores-by-test"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-tests" class="tab-panel">
+    <div class="grid">
+      <div class="card full">
+        <h2>Documentation des tests</h2>
+        <p class="hint">Chaque test avec son objectif, le prompt envoyé, et tous les critères de scoring détaillés.</p>
+        <div id="tests-catalog"></div>
       </div>
     </div>
   </section>
